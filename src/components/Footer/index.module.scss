@@ -1,0 +1,38 @@
+.footer {
+    position: relative;
+    background-color: #4B5563;
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.socialMediaIcons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.socialIcon {
+    font-size: 2rem;
+    transition: color 0.3s;
+}
+
+.socialIcon:hover {
+    color: #9CA3AF;
+}
+
+.contactInfo {
+    font-family: $font-family;
+    margin-bottom: 1rem;
+    font-size: 23px;
+}
+
+
+.languageSwitcher {
+    font-family: $font-family;
+    position: absolute;
+    color: black;
+    bottom: 1rem;
+    right: 1rem;
+}

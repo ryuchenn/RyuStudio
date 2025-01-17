@@ -1,0 +1,124 @@
+{
+    "TEST": "英文",
+    
+    "Home": {
+        "Title": "STUDIOS IN TORONTO",
+        "ShortTitle": "YOUR PHOTOGRAPHY AND AUDIO PRODUCTION SERVICES IN TORONTO",
+        "Services": "Services",
+
+        "LiveSound": "Live Sound / Recording",
+        "LiveSoundDescription": "We provide lighting and sound equipment, as well as sound engineering services for events such as speeches, band performances, worship sessions, and DJ shows.",
+        "Photography": "Photography",
+        "PhotographyDescription": "We offer services for wedding officiation, wedding photography, portrait photography, ID photos, and dance videography.",
+        "Coding": "Web / APP Design",
+        "CodingDescription": "We provide functionality and UI/UX design for websites and apps.",
+
+        "StudioDescription": "Ryu Studios is a 5000 sqft photo, film, music, and event rental studio in downtown Toronto. Our studios were designed in various styles to meet the different needs of musician, producers, DJ, photographers, videographers and other clients.",
+        "Book": "Book",
+        "BookDescription": "Please send us your questions, comments, and requests, as well as any inquiries on booking a tour, and we’ll get in touch with you ASAP!",
+        "Contact": "Contact Us",
+        "Learn": "Learn More",
+        "ShortTitle2": "Studio - Photography",
+        "StudioDescription2": "We provide seamless backdrops and various festive decorations, offering professional setups for models and photographers to create their art.",
+        "ShortTitle3": "Studio - Music",
+        "StudioDescription3": "We offer a recording studio for singers and musicians to produce their work. We also provide drum room rental for practice sessions.",
+        "GalleryTitle": "Gallery",
+        "AboutUs": "About Us",
+        "Studio": "Studio"
+    },
+    "Studio": {
+        "MusicStudioTitle": "Music Studio A",
+        "PhotoStudioTitle": "Photo Shoot Studio A",
+        "Overview": "Overview",
+        "Equipment": "Equipment",
+        "Lighting": "Lighting",
+        "Instruments": "Instruments",
+        "Microphones": "Microphones",
+
+        "Floor Plans": "Floor Plans",
+        "Price": "Price"
+    },
+    "Portfolio": {
+        "NotFound": "Image not found.",
+        "Photography": "Photography",
+        "Videography": "Videography",
+        "Music": "Music",
+        "All": "All",
+
+        "Portrait": "Portrait",
+        "Wedding": "Wedding",
+        "Pet": "Pet",
+        "Event": "Event",
+        "Product": "Product",
+        "Other": "Other",
+        "Movie": "Movie",
+        "MV": "MV",
+        "Shorts": "Shorts",
+        "Reels": "Reels",
+        "DJ": "DJ",
+        "PA": "PA",
+        "Recording": "Recording",
+        "Composition": "Composition"
+    },
+    "Project": {
+        "Title": "Projects",
+        "Search": "Search",
+        "Newest": "Newest",
+        "Oldest": "Oldest",
+        "Filter": "Filter",
+        "HideFilters": "Hide Filters",
+        "Date": "Date",
+        "NotFound": "Project not found.",
+        "Details": "Details",
+        "Field": "Field",
+        "Tags": "Tags",
+        "TechStack": "Tech Stack"
+    },
+    "Event": {
+        "Title": "Events",
+        "Search": "Search",
+        "Newest": "Newest",
+        "Oldest": "Oldest",
+        "Filter": "Filter",
+        "HideFilters": "Hide Filters",
+        "Date": "Date",
+        "NotFound": "Project not found.",
+        "Details": "Details",
+        "Field": "Field",
+        "Tags": "Tags",
+        "JoinEvent": "Join Event by Form"
+    },
+    "About": {
+        "Name": "Ryu Chen",
+        "Profession": "Software Engineer | Photographer | Musician",
+        "Description": "Hey there! 👋 I'm a software engineer with a strong passion for frontend and mobile development.",
+        "Skills": "My Skills",
+        "ProgrammingLanguages": "Programming Languages",
+        "Frontend": "Frontend Development",
+        "Backend": "Backend Development",
+        "Mobile": "Mobile App Development",
+        "Database": "Database",
+        "Cloud": "Cloud Services",
+        "Others": "Others",
+        "Instrument": "Instrument",
+        "Music": "Music",
+        "Photography": "Photography"
+    },
+    "Book": {
+        "Title": "Book",
+        "Description": "Please send us your questions, comments, and requests, as well as any inquiries on booking a tour, and we’ll get in touch with you ASAP!",
+        "Name": "Name",
+        "Email": "Email",
+        "PhoneNumber": "Phone Number",
+        "InstagramAccount": "Instagram Account",
+        "YourMessage": "Your Message(250 words)",
+        "Comments": "Comments",
+        "Submit": "Submit",
+        "SendSuccess": "Message sent successfully!",
+        "SendError": "Failed to send the message. Please try again."
+    },
+    "Contact": {
+        "Profession": "Photography｜Sound Design｜Web & APP Design"
+    }
+}
+  

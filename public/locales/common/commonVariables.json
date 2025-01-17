@@ -1,0 +1,31 @@
+{
+    
+    "SystemConfig": {
+        "404": "404 - Something went wrong",
+        "500": "500 - Something went wrong",
+        "StudioTitle": "Ryu Studio",
+        "StudioDescription": "Ryu Studio Portfolio",
+        "StudioAuthor": "Author",
+        "StudioCategory": "Software Engineer, Project Manager, Computer Scientist, Musician, Photographer, Sound Design, Web Design"
+    },
+    "Information": {
+        "StudioName": "Ryu Studio",
+        "Mail": "ryuchenforwork@gmail.com",
+        "Tel": "(+1) 437-012-3456",
+        "Address": "138 Downes St. Toronto, ON M5E 0G1"
+    },
+    "SocialMedia": {
+        "YoutubeLink": "#",
+        "InstagramLink": "#",
+        "FacebookLink": "#",
+        "TiktokLink": "#",
+        "TwitterLink": "#",
+
+        "YoutubeAccount": "@ryuchenforwork",
+        "InstagramAccount": "@ryuchenforwork",
+        "FacebookAccount": "@ryuchenforwork",
+        "TiktokAccount": "@ryuchenforwork",
+        "TwitterAccount": "@ryuchenforwork"
+    }
+}
+  

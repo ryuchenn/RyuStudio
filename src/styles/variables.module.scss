@@ -1,0 +1,23 @@
+$primary-color: #b2adad;
+$primary-light-color: rgba(0, 255, 255, 0.4);
+$secondary-color: rgb(0, 0, 0);
+$disabled-color: rgba(170, 170, 170, 0.281);
+$disabled-dark-color: rgba(170, 170, 170, 0.881);
+$error-color: rgb(255, 101, 101);
+$grey: rgba(255, 255, 255, 0.5);
+$font-family: "Saira Condensed", serif;
+$mobile-breakpoint: 768px;
+$pc-breakpoint: 1024px;
+
+:export {
+  primaryColor: $primary-color;
+  primaryLightColor: $primary-light-color;
+  secondaryColor: $secondary-color;
+  disabledColor: $disabled-color;
+  disabledDarkColor: $disabled-dark-color;
+  errorColor: $error-color;
+  grey: $grey;
+  fontFamily: $font-family;
+  mobileBreakpoint: $mobile-breakpoint;
+  pcBreakpoint: $pc-breakpoint;
+}
