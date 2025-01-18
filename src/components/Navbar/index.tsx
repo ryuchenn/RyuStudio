@@ -79,7 +79,7 @@ const Navbar: React.FC = () => {
               className={`${styles.MenuItem} ${
                 router.pathname === item.route ? styles.on : ""
               }`}
-              onClick={(e) => {
+              onClick={() => {
                 if (isMobile) {
                   // mobile
                   if (!item.subItems) {
