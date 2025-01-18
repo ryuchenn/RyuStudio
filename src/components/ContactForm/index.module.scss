@@ -3,9 +3,10 @@
   flex-direction: column;
   gap: 1.5rem;
   margin: 0 auto;
-  max-width: 80%; 
   width: 100%;
-  padding: 0 2rem; 
+
+  max-width: 80%;
+  padding: 0 2rem;
 }
 
 .inputGroup {
@@ -59,4 +60,22 @@
 
 .button:hover {
   background-color: #4b5563;
+}
+
+/* Mobile mode : dropdown menu */
+@media (max-width: $mobile-breakpoint) {
+  .form {
+    max-width: 100%;
+    margin: 5px;
+  }
+  
+  .inputField
+  {
+    width: 75%;
+  }
+
+  .textareaField{
+    width: 95%;
+
+  }
 }

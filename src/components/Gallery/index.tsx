@@ -19,6 +19,9 @@ const Gallery: React.FC<GalleryProps> = ({ items }) => {
   const [itemsPerView, setItemsPerView] = useState(4); // The pictures show on the srceen
   const scrollStep = 1; // Number of cards per scroll
 
+  // Determine if it's mobile mode
+  const isMobile = typeof window !== "undefined" && window.innerWidth <= MOBILE_BREAKPOINT;
+  
   // Dynamically update the number of cards displayed based on the window width.
   useEffect(() => {
     const updateItemsPerView = () => {
@@ -49,38 +52,42 @@ const Gallery: React.FC<GalleryProps> = ({ items }) => {
 
   return (
     <div className={styles.gallery}>
+      {!isMobile && (
+        <button
+          onClick={handlePrev}
+          className={styles.galleryButton}
+          disabled={scrollIndex === 0}
+        >
+          &lt;
+        </button>
+      )}
 
-      {/* 『 < 』 Button */}
-      <button
-        onClick={handlePrev}
-        className={styles.galleryButton}
-        disabled={scrollIndex === 0}
+      <div
+        className={`${styles.galleryContainer} ${isMobile ? styles.mobileScroll : ""}`}
       >
-        &lt;
-      </button>
-
-      {/* Picture, Title, Description */}
-      <div className={styles.galleryContainer}>
         <div
           className={styles.galleryItems}
           style={{
-            transform: `translateX(-${scrollIndex * (100 / itemsPerView)}%)`,
+            transform: !isMobile
+              ? `translateX(-${scrollIndex * (100 / itemsPerView)}%)`
+              : "none",
           }}
         >
           {items.map((item) => (
             <div
               key={item.id}
               className={styles.galleryItem}
-              style={{ flex: `0 0 ${100 / itemsPerView}%` }} 
+              style={{ flex: `0 0 ${100 / itemsPerView}%` }}
             >
               <div className={styles.galleryImageWrapper}>
                 <Image
                   src={item.image}
                   alt={item.title}
                   className={styles.galleryImage}
-                  width={500} height={500} priority
-                >
-                </Image>
+                  width={500}
+                  height={500}
+                  priority
+                />
               </div>
               <h3 className={styles.galleryTitle}>{item.title}</h3>
               <p className={styles.galleryDescription}>{item.description}</p>
@@ -89,14 +96,15 @@ const Gallery: React.FC<GalleryProps> = ({ items }) => {
         </div>
       </div>
 
-      {/* 『 > 』 Button */}
-      <button
-        onClick={handleNext}
-        className={styles.galleryButton}
-        disabled={scrollIndex === items.length - itemsPerView}
-      >
-        &gt;
-      </button>
+      {!isMobile && (
+        <button
+          onClick={handleNext}
+          className={styles.galleryButton}
+          disabled={scrollIndex === items.length - itemsPerView}
+        >
+          &gt;
+        </button>
+      )}
     </div>
   );
 };

@@ -1,11 +1,12 @@
 @import "@/styles/common.module.css";
 
 .Container {
-    margin-top: 60px;
+    // margin-top: 60px;
     padding-top: 0rem;
   
     @media only screen and (max-width: $mobile-breakpoint) {
-      // margin-inline: 2rem;
+      // margin-inline: 1rem;
+      margin-top: 0px;
     }
   }
   
