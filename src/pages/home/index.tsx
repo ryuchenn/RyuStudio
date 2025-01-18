@@ -110,11 +110,13 @@ const HomePage = () => {
                             <p className="text-gray-700">{t("translation:Home.PhotographyDescription")}</p>
                         </div>
                         <div className="flex flex-col items-center text-black">
-                            <img
+                            <Image
                                 src="https://static.vecteezy.com/system/resources/previews/001/831/032/non_2x/web-design-studio-unique-design-kit-for-social-networks-stories-vector.jpg"
                                 alt="Live Sound"
                                 className="w-full h-64 object-cover rounded-lg shadow-lg mb-6"
-                            />
+                                width={500} height={500} priority
+                            >
+                            </Image>
                             <h3 className="text-2xl font-bold mb-4">{t("translation:Home.Coding")}</h3>
                             <p className="text-gray-700">{t("translation:Home.CodingDescription")}</p>
                         </div>

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styles from "./index.module.scss";
 import { MOBILE_BREAKPOINT } from "@/helpers/constants";
+import Image from "next/image";
+
 type GalleryItem = {
   id: string;
   image: string;
@@ -72,11 +74,13 @@ const Gallery: React.FC<GalleryProps> = ({ items }) => {
               style={{ flex: `0 0 ${100 / itemsPerView}%` }} 
             >
               <div className={styles.galleryImageWrapper}>
-                <img
+                <Image
                   src={item.image}
                   alt={item.title}
                   className={styles.galleryImage}
-                />
+                  width={500} height={500} priority
+                >
+                </Image>
               </div>
               <h3 className={styles.galleryTitle}>{item.title}</h3>
               <p className={styles.galleryDescription}>{item.description}</p>
