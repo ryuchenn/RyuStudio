@@ -1,5 +1,5 @@
 import React from 'react';
-import { photographyCategories, photographyAllImages } from "@/content/profoliocard";
+import { photographyCategories, photographyAllImages } from "@/content/profolioCard";
 import PortfolioCard from "@/components/PortfolioCard";
 import { useTranslation } from 'react-i18next';
 

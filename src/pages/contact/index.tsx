@@ -1,7 +1,8 @@
 import React from 'react';
-import { FaYoutube, FaInstagram, FaTiktok, FaTwitter, FaTwitch, FaEnvelope, FaFacebookF } from 'react-icons/fa';
+import { FaYoutube, FaInstagram, FaTiktok, FaTwitter, FaEnvelope, FaFacebookF } from 'react-icons/fa';
 import styles from "./index.module.scss"
 import { useTranslation } from 'react-i18next';
+import Image from 'next/image';
 
 const Contact: React.FC = () => {
   const { t } = useTranslation(['translation', 'dynamicContent', 'commonVariables']); 
@@ -11,11 +12,12 @@ const Contact: React.FC = () => {
 
       {/* Header */}
       <div className={styles.contactHeader}>
-        <img
+        <Image
           src="/assets/icons/logo.png"
           alt="Profile"
           className={styles.contactLogo}
-        />
+          width={500} height={500} priority
+        ></Image>
         <h1 className={styles.contactTitle}>{t("commonVariables:Information.StudioName")}</h1>
         <p className={styles.contactDescription}>{t("translation:Contact.Profession")}</p>
       </div>

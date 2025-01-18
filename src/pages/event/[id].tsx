@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { projects } from "@/content/eventsDetail";
 import { useTranslation } from 'react-i18next';
 import styles from "./id.module.scss";
+import Image from "next/image";
 
 const EventDetailsPage = () => {
   const { t } = useTranslation(['translation', 'dynamicContent', 'commonVariables']); 
@@ -20,11 +21,12 @@ const EventDetailsPage = () => {
 
       <div className={styles.content}>
         {/* Description, image, .... */}
-        <img
+        <Image
           src={project.image}
           alt={project.title}
           className={styles.image}
-        />
+          width={500} height={500} priority
+        ></Image>
         <p className={styles.description}>{project.description}</p>
         <h2 className={styles.subtitle}>{t("translation:Event.Details")}</h2>
         <p className={styles.details}>{project.details}</p>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import { projects, techStacks, tags } from "@/content/events";
 import styles from "./index.module.scss";
 import { useTranslation } from 'react-i18next';
@@ -123,10 +124,13 @@ const EventPageEmbed = () => {
             className={styles.projectCard}
             onClick={() => router.push(`/event/${project.id}`)}
           >
-            <img
+            <Image
               src={project.image}
               alt={project.title}
               className={styles.projectImage}
+              width={500}
+              height={500} 
+              priority
             />
             <h3 className={styles.projectTitle}>{project.title}</h3>
             <p className={styles.projectDate}>{t("translation:Event.Date")}: {project.date}</p>

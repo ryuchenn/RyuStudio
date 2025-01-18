@@ -1,5 +1,5 @@
 import React from 'react';
-import { musicCategories, musicAllImages } from "@/content/profoliocard";
+import { musicCategories, musicAllImages } from "@/content/profolioCard";
 import PortfolioCard from "@/components/PortfolioCard";
 import { useTranslation } from 'react-i18next';
 

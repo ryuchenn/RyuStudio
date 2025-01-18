@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import styles from './index.module.scss';
 import ContactForm from "@/components/ContactForm";
 import Googlemap from "@/components/Googlemap";
+import Image from "next/image";
 
 const Book: React.FC = () => {
   const { t } = useTranslation(['translation', 'dynamicContent', 'commonVariables']); 
@@ -17,7 +18,10 @@ const Book: React.FC = () => {
           </div>
 
           <div className={`${styles.grid} ${styles.gridLg}`}>
-            <img src="/assets/test/BookA.png" alt="Studio location" className={styles.img} />
+            <Image
+              src="/assets/test/BookA.png" alt="Studio location" className={styles.img}
+              width={500} height={500} priority
+            ></Image>
             <Googlemap></Googlemap>
           </div>
         </div>

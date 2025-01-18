@@ -1,5 +1,5 @@
 import React from 'react';
-import { videographyCategories, videographyAllImages } from "@/content/profoliocard";
+import { videographyCategories, videographyAllImages } from "@/content/profolioCard";
 import PortfolioCard from "@/components/PortfolioCard";
 import { useTranslation } from 'react-i18next';
 

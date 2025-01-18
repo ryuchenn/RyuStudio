@@ -1,9 +1,7 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import styles from './index.module.scss';
 
 const Googlemap: React.FC = () => {
-    const { t } = useTranslation(['translation', 'dynamicContent', 'commonVariables']);
 
     return (
         <>

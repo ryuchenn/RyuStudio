@@ -2,6 +2,7 @@ import { useState } from "react";
 import { projects, techStacks, tags } from "@/content/project";
 import styles from "./index.module.scss";
 import { useTranslation } from 'react-i18next';
+import Image from "next/image";
 
 const ProjectsForm = () => {
   const { t } = useTranslation(['translation', 'dynamicContent', 'commonVariables']); 
@@ -104,11 +105,12 @@ const ProjectsForm = () => {
       <div className={styles.projectsGrid}>
         {filteredProjects.map((project) => (
           <div key={project.id} className={styles.projectCard}>
-            <img
-              src={project.image}
-              alt={project.title}
-              className={styles.projectImage}
-            />
+            <Image
+                src={project.image}
+                alt={project.title}
+                className={styles.projectImage}
+                width={500} height={500} priority
+            ></Image>
             <h3 className={styles.projectTitle}>{project.title}</h3>
             <div className={styles.projectTechStack}>
               {project.techStack.map((tech) => (

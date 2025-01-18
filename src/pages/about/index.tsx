@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './index.module.scss';
 import { ProgrammingLanguages, Frontend, Backend, Mobile, Database, Cloud, Others, Instrument, Music, Photography} from '@/content/about'
+import Image from 'next/image';
 
 interface SkillCategoryProps {
   title: string;
@@ -37,11 +38,12 @@ const About: React.FC = () => {
 
           {/* Header Section */}
           <div className={styles.header}>
-            <img
+            <Image
               src="assets/icons/logo.png"
               alt="Profile"
               className={styles.profileImage}
-            />
+              width={500} height={500} priority
+            ></Image>
             <div>
               <h1 className={styles.name}>{t("translation:About.Name")}</h1>
               <h2 className={styles.profession}>

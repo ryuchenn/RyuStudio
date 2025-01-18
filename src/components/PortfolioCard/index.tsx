@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from "next/router";
 import styles from "./index.module.scss";
+import Image from 'next/image';
 
 type PortfolioCardProps = {
   title: string;
@@ -68,11 +69,10 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ title, categories, allIma
             onClick={() => handleImageClick(image.id, image.category)}
             className={styles.imageItem}
           >
-            <img
-              src={image.src}
-              alt={image.title}
-              className={styles.image}
-            />
+            <Image 
+              src={image.src} alt={image.title} className={styles.image}
+              width={500} height={500} priority
+            ></Image>
             <div className={styles.overlay}>
               <span className={styles.overlayText}>{image.title}</span>
             </div>
