@@ -9,9 +9,10 @@ const ImageDetailsPage = () => {
   const router = useRouter();
   // const { category, id } = router.query;
   const { id } = router.query;
+  const numericId = typeof id === "string" ? parseInt(id, 10) : NaN;
 
   // Find detailed image by ID
-  const imageSet = detailAllImages.find((img) => img.id === id);
+  const imageSet = detailAllImages.find((img) => img.id === numericId);
 
   if (!imageSet) {
     return <p>{t("translation:Portfolio.NotFound")}</p>;

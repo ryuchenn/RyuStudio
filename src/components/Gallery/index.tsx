@@ -4,7 +4,7 @@ import { MOBILE_BREAKPOINT } from "@/helpers/constants";
 import Image from "next/image";
 
 type GalleryItem = {
-  id: string;
+  id: number;
   image: string;
   title: string;
   description: string;

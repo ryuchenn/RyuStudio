@@ -6,7 +6,7 @@ import Image from 'next/image';
 type PortfolioCardProps = {
   title: string;
   categories: string[];
-  allImages: { id: string; category: string[]; src: string; title: string }[];
+  allImages: { id: number; category: string[]; src: string; title: string }[];
 };
 
 const PortfolioCard: React.FC<PortfolioCardProps> = ({ title, categories, allImages }) => {
@@ -22,7 +22,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ title, categories, allIma
       : allImages.filter((img) => img.category.includes(selectedCategory));
 
   // Click the image to the detailed page
-  const handleImageClick = (id: string, category: string[]) => {
+  const handleImageClick = (id: number, category: string[]) => {
     router.push(`/portfolio/${category[0].toLowerCase()}/${id}`);
   };
 
