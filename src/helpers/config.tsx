@@ -1,5 +1,6 @@
 import Head from "next/head"
 import { useTranslation } from 'react-i18next';
+import Script from "next/script";
 
 const SystemConfig = () => {
   const { t } = useTranslation(['translation', 'dynamicContent', 'commonVariables']); 
@@ -48,8 +49,23 @@ const SystemConfig = () => {
           content='width=device-width, minimum-scale=1, initial-scale=1.0'
         />
         <meta name='theme-color' content='#000' />
-
+          {/* Google Analytics */}
+      <Script
+        strategy="lazyOnload"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
+      />
+      <Script strategy="lazyOnload">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}',{
+          page_path: window.location.pathname,
+         `}
+      </Script>
       </Head>
+
+      
     </>
   )
 }

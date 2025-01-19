@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./index.module.scss";
 import { MOBILE_BREAKPOINT } from "@/helpers/constants";
 import Image from "next/image";
+import useViewport from "@/hooks/useViewport";
 
 type GalleryItem = {
   id: number;
@@ -20,7 +21,7 @@ const Gallery: React.FC<GalleryProps> = ({ items }) => {
   const scrollStep = 1; // Number of cards per scroll
 
   // Determine if it's mobile mode
-  const isMobile = typeof window !== "undefined" && window.innerWidth <= MOBILE_BREAKPOINT;
+  const { isMobile } = useViewport();
   
   // Dynamically update the number of cards displayed based on the window width.
   useEffect(() => {

@@ -78,18 +78,18 @@
     .galleryContainer {
       overflow: hidden;
       padding: 0 2rem;
-    
+      
+      white-space: nowrap; 
+      overflow-x: scroll; 
+      overflow-y: hidden; 
+      -ms-overflow-style: none;
+      scrollbar-width: none; /* hidden scroll bar */
+
       &.mobileScroll {
         overflow-x: auto;
         scroll-snap-type: x mandatory;
         flex-wrap: nowrap;
         padding: 1;
-
-        overflow-x: scroll; 
-        overflow-y: hidden; 
-        white-space: nowrap; 
-        -ms-overflow-style: none;
-        scrollbar-width: none; /* hidden scroll bar */
       }
     
       .galleryItems {
@@ -105,6 +105,10 @@
       .galleryItem {
         scroll-snap-align: center;
       }
+    }
+
+    .galleryContainer::-webkit-scrollbar {
+      display: none; /* Chrome, Safari,Edge Hidden */
     }
     
     .galleryButton {

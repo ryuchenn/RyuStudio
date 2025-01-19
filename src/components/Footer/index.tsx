@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaFacebookF, FaInstagram, FaTiktok, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { SiXiaohongshu } from 'react-icons/si';
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useTranslation } from 'react-i18next';
 import styles from './index.module.scss';
@@ -26,6 +27,9 @@ const Footer: React.FC = () => {
           </a>
           <a href={t("commonVariables:SocialMedia.TwitterLink")} target="_blank" rel="noopener noreferrer" aria-label="Twitter">
             <FaTwitter className={styles.socialIcon} />
+          </a>
+          <a href={t("commonVariables:SocialMedia.XiaohongshuLink")} target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+            <SiXiaohongshu className={styles.socialIcon} />
           </a>
         </div>
 

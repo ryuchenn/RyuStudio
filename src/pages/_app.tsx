@@ -1,7 +1,7 @@
 import { AppProps } from 'next/app'; 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-// import { GoogleAnalytics } from "nextjs-google-analytics"
+import { GoogleAnalytics } from "nextjs-google-analytics";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Container from "@/components/Container";
@@ -26,7 +26,7 @@ function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      {/* <GoogleAnalytics trackPageViews /> */}
+      <GoogleAnalytics trackPageViews />
       <SystemConfig />
       <Navbar />
       <Container>

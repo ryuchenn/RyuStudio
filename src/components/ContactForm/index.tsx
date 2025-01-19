@@ -2,9 +2,11 @@ import React, { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import styles from "./index.module.scss";
 import { useTranslation } from "react-i18next";
+import useViewport from "@/hooks/useViewport";
 
 const ContactForm: React.FC = () => {
   const { t } = useTranslation(['translation', 'dynamicContent', 'commonVariables']);
+  const { isMobile } = useViewport();
 
   const form = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
@@ -112,23 +114,40 @@ const ContactForm: React.FC = () => {
         </div>
       </div>
 
-      <div>
-        <label className={styles.label} htmlFor="message">
-          *{t("translation:Book.YourMessage")}
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          placeholder={t("translation:Book.Comments")}
-          rows={4}
-          className={styles.textareaField}
-          maxLength={250}
-          required
-        ></textarea>
-      </div>
-
+      {isMobile ? (
+        <div className={`${styles.inputGroup} ${styles.inputGroupLg}`}>
+          <div>
+            <label className={styles.label} htmlFor="message">
+              *{t("translation:Book.YourMessage")}
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              placeholder={t("translation:Book.Comments")}
+              rows={4}
+              className={styles.textareaField}
+              maxLength={250}
+              required
+            ></textarea>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <label className={styles.label} htmlFor="message">
+            *{t("translation:Book.YourMessage")}
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            placeholder={t("translation:Book.Comments")}
+            rows={4}
+            className={styles.textareaField}
+            maxLength={250}
+            required
+          ></textarea>
+        </div>
+      )}
+      
       <button type="submit" className={styles.button}>
         {t("translation:Book.Submit")}
       </button>

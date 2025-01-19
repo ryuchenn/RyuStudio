@@ -118,7 +118,8 @@
         "SendError": "Failed to send the message. Please try again."
     },
     "Contact": {
-        "Profession": "Photography｜Sound Design｜Web & APP Design"
+        "Profession": "Photography｜Sound Design｜Web & APP Design",
+        "Xiaohongshu": "Xiaohongshu"
     }
 }
   

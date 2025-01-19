@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaYoutube, FaInstagram, FaTiktok, FaTwitter, FaEnvelope, FaFacebookF } from 'react-icons/fa';
+import { SiXiaohongshu } from "react-icons/si";
 import styles from "./index.module.scss"
 import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
@@ -38,6 +39,9 @@ const Contact: React.FC = () => {
         </a>
         <a href={t("commonVariables:SocialMedia.TwitterLink")} className={styles.socialIcon}>
           <FaTwitter className={styles.socialIcon} />
+        </a>
+        <a href={t("commonVariables:SocialMedia.Xiaohongshu")} className={styles.socialIcon}>
+          <SiXiaohongshu className={styles.socialIcon} />
         </a>
       </div>
 
@@ -98,6 +102,16 @@ const Contact: React.FC = () => {
             <FaTwitter className={styles.icon} />
             <div>
               <p className={styles.linkTitle}>🌏 Twitter</p>
+              <p className={styles.linkDescription}>{t("commonVariables:SocialMedia.TwitterAccount")}</p>
+            </div>
+          </div>
+        </a>
+
+        <a href={t("commonVariables:SocialMedia.XiaohongshuLink")} className={styles.contactLink}>
+          <div className={styles.linkContent}>
+            <SiXiaohongshu className={styles.icon} />
+            <div>
+              <p className={styles.linkTitle}>📕 {t("translation:Contact.Xiaohongshu")}</p>
               <p className={styles.linkDescription}>{t("commonVariables:SocialMedia.TwitterAccount")}</p>
             </div>
           </div>
