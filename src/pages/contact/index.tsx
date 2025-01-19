@@ -40,7 +40,7 @@ const Contact: React.FC = () => {
         <a href={t("commonVariables:SocialMedia.TwitterLink")} className={styles.socialIcon}>
           <FaTwitter className={styles.socialIcon} />
         </a>
-        <a href={t("commonVariables:SocialMedia.Xiaohongshu")} className={styles.socialIcon}>
+        <a href={t("commonVariables:SocialMedia.XiaohongshuLink")} className={styles.socialIcon}>
           <SiXiaohongshu className={styles.socialIcon} />
         </a>
       </div>
