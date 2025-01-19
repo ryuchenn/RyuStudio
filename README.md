@@ -3,7 +3,7 @@
     <img src="public/git/Home.png" alt="Home"/>
 </div>
 This is my studio website built by NEXT.js, Typescript and SCSS. 
-Click [here](https://studio-website-omega.vercel.app/) to check out my studio portfolio!
+Click [here](https://studio-website-omega.vercel.app) to check out my studio portfolio!
 
 ## File Structure
 ```
