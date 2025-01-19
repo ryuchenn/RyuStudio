@@ -30,8 +30,8 @@ function App({ Component, pageProps }: AppProps) {
       <GoogleAnalytics trackPageViews />
       <SystemConfig/>
       <GoogleAnalyticsConfig></GoogleAnalyticsConfig>
+      <Navbar/>
       <Container>
-        <Navbar/>
         <Component {...pageProps} />
       </Container>
       <Footer />
