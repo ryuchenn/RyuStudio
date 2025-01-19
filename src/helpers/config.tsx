@@ -1,6 +1,5 @@
 import Head from "next/head"
 import { useTranslation } from 'react-i18next';
-import Script from "next/script";
 
 const SystemConfig = () => {
   const { t } = useTranslation(['translation', 'dynamicContent', 'commonVariables']); 
