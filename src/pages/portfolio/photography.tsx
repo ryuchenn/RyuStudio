@@ -11,7 +11,7 @@ const PortfolioPhotography: React.FC = () => {
       <div>
         <PortfolioCard
           title={t("translation:Portfolio.Photography")}
-          categories={photographyCategories.map((category) => t(`translation:Portfolio.${category}`))}
+          categories={photographyCategories.map((category) => category )}
           allImages={photographyAllImages}
         />
       </div>

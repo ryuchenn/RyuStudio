@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useRouter } from "next/router";
 import styles from "./index.module.scss";
 import Image from 'next/image';
+import { useTranslation } from 'react-i18next';
 
 type PortfolioCardProps = {
   title: string;
@@ -10,6 +11,7 @@ type PortfolioCardProps = {
 };
 
 const PortfolioCard: React.FC<PortfolioCardProps> = ({ title, categories, allImages }) => {
+  const { t } = useTranslation(['translation', 'dynamicContent', 'commonVariables']); 
   const router = useRouter();
 
   // The category that user choose 
@@ -40,7 +42,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ title, categories, allIma
               onClick={() => setSelectedCategory(cat)}
               className={`${styles.categoryButton} ${selectedCategory === cat ? styles.selected : ""}`}
             >
-              {cat}
+              {t(`translation:Portfolio.${cat}`)}
             </button>
           ))}
         </div>
@@ -54,7 +56,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ title, categories, allIma
           >
             {categories.map((cat) => (
               <option key={cat} value={cat}>
-                {cat}
+                {t(`translation:Portfolio.${cat}`)}
               </option>
             ))}
           </select>
