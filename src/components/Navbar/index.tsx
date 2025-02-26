@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Image from "next/image";
 import styles from "./index.module.scss";
 import MenuButton from "../MenuButton";
 import useViewport from "@/hooks/useViewport";
 import { MENU_ITEMS } from "./menu";
-import Link from "next/link";
+// import Link from "next/link";
+// import Image from "next/image";
 
 const Navbar: React.FC = () => {
   const router = useRouter();
@@ -50,14 +50,14 @@ const Navbar: React.FC = () => {
         }}
       >
         <div className={styles.topbar}>
-          <Link href="/">
+          {/* <Link href="/">
             <Image
               src="/assets/icons/logo.png"
               width={40}
               height={40}
               alt="logo"
             />
-          </Link>
+          </Link> */}
           {isMobile && (
             <div>
               <MenuButton

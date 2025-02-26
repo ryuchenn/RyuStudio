@@ -1,10 +1,12 @@
 
+// General styles
 .container {
   min-height: 100vh;
   background-color: white;
   color: black;
 }
 
+// Hero section
 .hero {
   position: relative;
   width: 100%;
@@ -32,99 +34,276 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .heroText {
-  text-align: center;
   color: white;
+  font-size: 4rem;
+  font-weight: bold;
+  text-align: center;
+
+  @media (min-width: $mobile-breakpoint) {
+    font-size: 4rem;
+  }
 }
 
+.heroSubtitle{
+  color: white;
+  font-size: 0rem;
+  text-align: center;
+
+  @media (min-width: $mobile-breakpoint) {
+    font-size: 2rem;
+  }
+}
 .logoSection {
-  padding: 2rem 0;
-  background-color: #f3f4f6;
+  overflow: hidden;
+  white-space: nowrap;
+  background-color: #f9fafb;
+  padding: 1rem 0;
+}
+
+.marqueeWrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
 }
 
 .marquee {
   display: flex;
-  animation: marquee 15s linear infinite;
+  gap: 2rem;
+  animation: scrollLeft 25s linear infinite;
+  width: max-content; 
 }
 
 .logo {
-  height: 4rem;
-  margin: 0 1rem;
+  height: 80px;
+  width: auto;
+  object-fit: contain;
 }
 
+@keyframes scrollLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+// Animations
 @keyframes marquee {
   0% {
-    transform: translateX(100%);
+    transform: translateX(0%);
   }
   100% {
     transform: translateX(-100%);
   }
 }
 
-.descriptionSection {
+// Studio description
+.aboutSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: 2rem 0;
-}
-
-.description {
-  font-size: 1.25rem;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-
-.textImageSection,
-.imageTextSection {
   padding: 4rem 0;
+  max-width: 1000px;
+  margin: 0 auto;  
 }
 
-.textImageContainer {
+.aboutTitle {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem; 
+}
+
+.aboutText {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  max-width: 800px;
+  line-height: 1.6;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  @media (min-width: $mobile-breakpoint) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+// Services section
+.servicesSection {
+  padding: 4rem 0;
+  background-color: #f9fafb;
+  text-align: center;
+  padding-left: 0px;
+  padding-right: 0px;
+
+  @media (min-width: $mobile-breakpoint) {
+    padding-left: 75px;
+    padding-right: 75px;
+  }
+
+  @media (min-width: $pc-breakpoint) {
+    padding-left: 150px;
+    padding-right: 150px;
+  }
+}
+
+.serviceGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin: 1.5rem;
+
+  @media (min-width: $mobile-breakpoint) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.serviceItem {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 }
 
-.text {
+.serviceTitle {
+  font-size: 3rem; 
+  font-weight: bold; 
+  text-align: center; 
+}
+
+.serviceImage {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9; 
+  object-fit: cover;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.serviceSubTitle{
+  font-size: 1.5rem;
+  font-weight: bold; 
+}
+
+// Studio Section
+.studioSection {
+  padding: 4rem 0;
+  text-align: center;
+  background-color: white;
+
+  &.studioReverse {
+    background-color: #f9fafb;
+  }
+}
+
+.studioTitle {
+  font-size: 3rem;
+  font-weight: bold;
   margin-bottom: 2rem;
 }
 
-.image img {
-  width: 100%;
+.studioContainer {
+  max-width: 72rem; 
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 2rem;
+
+  @media (min-width: $mobile-breakpoint) { 
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+}
+
+.studioText {
+  flex: 1;
+  text-align: center;
+
+  padding-left: 20px;
+  padding-right: 20px;
+
+  @media (min-width: $mobile-breakpoint) {
+    text-align: center;
+  }
+}
+
+.studioSubtitle {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 1rem 0;
+  
+  @media (min-width: $mobile-breakpoint) {
+    text-align: center;
+  }
+}
+
+.studioDescription {
+  font-size: 1.125rem;
+  margin: 0.5rem 0;
+}
+
+.studioButton {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: black;
+  color: white;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  display: inline-block;
+
+  &:hover {
+    background-color: #333;
+  }
+}
+
+.studioImageWrapper {
+  flex: 1;
+  margin: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.studioImage {
   border-radius: 0.5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.contactSection {
+
+// Book section
+.bookTitle {
+  font-size: 3rem; 
+  font-weight: bold; 
+  text-align: center;
+}
+
+.bookDescription {
+  font-size: 1.125rem; 
+  text-align: center;
+  padding-bottom: 30px;
+  gap: 2rem;
+  margin: 1.5rem;
+}
+
+// Contact section
+.mapSection {
   background-color: white;
   padding: 2rem 0;
 }
 
-.contactContainer {
+.mapContainer {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
   justify-content: center;
 }
-
-.formContainer {
-  flex: 1;
-}
-
-
-@keyframes marquee {
-    0% {
-      transform: translateX(0%);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
-  }
-  
-  .animate-marquee {
-    animation: marquee 15s linear infinite;
-  }
-
-

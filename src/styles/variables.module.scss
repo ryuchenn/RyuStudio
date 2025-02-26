@@ -9,15 +9,15 @@ $font-family: "Saira Condensed", serif;
 $mobile-breakpoint: 768px;
 $pc-breakpoint: 1024px;
 
-:export {
-  primaryColor: $primary-color;
-  primaryLightColor: $primary-light-color;
-  secondaryColor: $secondary-color;
-  disabledColor: $disabled-color;
-  disabledDarkColor: $disabled-dark-color;
-  errorColor: $error-color;
-  grey: $grey;
-  fontFamily: $font-family;
-  mobileBreakpoint: $mobile-breakpoint;
-  pcBreakpoint: $pc-breakpoint;
-}
+// :export {
+//   primaryColor: $primary-color;
+//   primaryLightColor: $primary-light-color;
+//   secondaryColor: $secondary-color;
+//   disabledColor: $disabled-color;
+//   disabledDarkColor: $disabled-dark-color;
+//   errorColor: $error-color;
+//   grey: $grey;
+//   fontFamily: $font-family;
+//   mobileBreakpoint: $mobile-breakpoint;
+//   pcBreakpoint: $pc-breakpoint;
+// }
