@@ -14,6 +14,18 @@ export const photographyAllImages = [
   { id: 9, category: ["Event"], src: "/assets/test/Test6.jpg", title: "Event 2" },
   { id: 10, category:["Pet"], src: "/assets/test/Test10.jpg", title: "Pet 2" },
   { id: 11, category:["Product"], src: "/assets/test/Test0-1.webp", title: "Product 2" },
+
+  // { id: 12, category: ["Portrait", "Wedding"], src: "/assets/test/Test9.jpg", title: "Portrait 1" },
+  // { id: 13, category: ["Portrait", "Wedding"], src: "/assets/test/Test8.jpg", title: "Portrait 2" },
+  // { id: 14, category: ["Pet"], src: "/assets/test/Test1.jpg", title: "Pet 1" },
+  // { id: 15, category: ["Event"], src: "/assets/test/Test2.jpg", title: "Event 1" },
+  // { id: 16, category: ["Wedding"], src: "/assets/test/Test3.jpg", title: "Wedding 1" },
+  // { id: 17, category: ["Other"], src: "/assets/test/Test4.jpg", title: "Other 2" },
+  // { id: 18, category: ["Wedding"], src: "/assets/test/Test7.jpg", title: "Wedding 2" },
+  // { id: 19, category: ["Product"], src: "/assets/test/Test5.jpg", title: "Product 1" },
+  // { id: 20, category: ["Event"], src: "/assets/test/Test6.jpg", title: "Event 2" },
+  // { id: 21, category:["Pet"], src: "/assets/test/Test10.jpg", title: "Pet 2" },
+  // { id: 22, category:["Product"], src: "/assets/test/Test0-1.webp", title: "Product 2" },
 ];
 
 export const videographyAllImages = [

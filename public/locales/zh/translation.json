@@ -59,7 +59,8 @@
         "DJ": "DJ",
         "PA": "PA音控",
         "Recording": "錄音",
-        "Composition": "創作"
+        "Composition": "創作",
+        "LoadMore": "載入更多"
     },
     "Project": {
         "Title": "專案",

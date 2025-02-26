@@ -58,7 +58,8 @@
         "DJ": "DJ",
         "PA": "PA",
         "Recording": "Recording",
-        "Composition": "Composition"
+        "Composition": "Composition",
+        "LoadMore": "Load More"
     },
     "Project": {
         "Title": "Projects",

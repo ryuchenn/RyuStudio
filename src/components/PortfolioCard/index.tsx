@@ -14,16 +14,27 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ title, categories, allIma
   const { t } = useTranslation(['translation', 'dynamicContent', 'commonVariables']); 
   const router = useRouter();
 
-  // The category that user choose 
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [visibleImages, setVisibleImages] = useState(10); // Initial display
+  const [loadedImages, setLoadedImages] = useState<number[]>([]); // Track loaded images
 
-  // Filter image
+  // Handle image loading effect
+  const handleImageLoad = (id: number) => {
+    setLoadedImages((prev) => [...prev, id]);
+  };
+
+  // Handle Load More button
+  const handleLoadMore = () => {
+    setVisibleImages((prev) => prev + 10);
+  };
+
+  // Filter images based on category selection
   const filteredImages =
     selectedCategory === "All"
       ? allImages
       : allImages.filter((img) => img.category.includes(selectedCategory));
 
-  // Click the image to the detailed page
+  // Click image to go to detail page
   const handleImageClick = (id: number, category: string[]) => {
     router.push(`/portfolio/${category[0].toLowerCase()}/${id}`);
   };
@@ -32,9 +43,8 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ title, categories, allIma
     <div className={styles.container}>
       <h1 className={styles.title}>{title}</h1>
 
-      {/* Filter: select and dropdown menu */}
+      {/* Category selection */}
       <div className={styles.categoryWrapper}>
-        {/* PC mode button */}
         <div className={`${styles.categoryButtons} ${styles.hiddenOnMobile}`}>
           {categories.map((cat) => (
             <button
@@ -47,7 +57,6 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ title, categories, allIma
           ))}
         </div>
 
-        {/* mobile mode button */}
         <div className="md:hidden">
           <select
             className={styles.categoryDropdown}
@@ -63,24 +72,38 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ title, categories, allIma
         </div>
       </div>
 
-      {/* Picture list */}
+      {/* Image grid */}
       <div className={styles.imageGrid}>
-        {filteredImages.map((image) => (
+        {filteredImages.slice(0, visibleImages).map((image) => (
           <div
             key={image.id}
             onClick={() => handleImageClick(image.id, image.category)}
-            className={styles.imageItem}
+            className={`${styles.imageItem} ${loadedImages.includes(image.id) ? styles.fadeIn : ""}`}
           >
             <Image 
-              src={image.src} alt={image.title} className={styles.image}
-              width={500} height={500} priority
-            ></Image>
+              src={image.src} 
+              alt={image.title} 
+              className={styles.image}
+              width={500} 
+              height={500} 
+              priority 
+              onLoad={() => handleImageLoad(image.id)}
+            />
             <div className={styles.overlay}>
               <span className={styles.overlayText}>{image.title}</span>
             </div>
           </div>
         ))}
       </div>
+
+      {/* Load More Button */}
+      {visibleImages < filteredImages.length && (
+        <div className={styles.loadMoreContainer}>
+          <button onClick={handleLoadMore} className={styles.loadMoreButton}>
+            {t("translation:Portfolio.LoadMore")}
+          </button>
+        </div>
+      )}
     </div>
   );
 };
