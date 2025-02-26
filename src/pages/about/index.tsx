@@ -55,7 +55,6 @@ const About: React.FC = () => {
             </div>
           </div>
 
-
           {/* Skills Section */}
           <div>
             <h3 className={styles.skillsTitle}>{t("translation:About.Skills")}</h3>
@@ -69,55 +68,55 @@ const About: React.FC = () => {
               <SkillCategory
                 title={t("translation:About.Frontend")}
                 skills={Frontend}
-                color="#fde68a"
+                color="#ffe8cc"
               />
 
               <SkillCategory
                 title={t("translation:About.Backend")}
                 skills={Backend}
-                color="#ccee00"
+                color="#d1f7f5"
               />
 
               <SkillCategory
                 title={t("translation:About.Mobile")}
                 skills={Mobile}
-                color="#9cced1"
+                color="#c4f1ff"
               />
 
               <SkillCategory
                 title={t("translation:About.Database")}
                 skills={Database}
-                color="#fc9"
+                color="#d5ffe4"
               />
 
               <SkillCategory
                 title={t("translation:About.Cloud")}
                 skills={Cloud}
-                color="#9ccea9"
+                color="#a8e6ff"
               />
 
               <SkillCategory
                 title={t("translation:About.Others")}
                 skills={Others}
-                color="#9ccef1"
+                color="#f8e8a6"
               />
 
               <SkillCategory
                 title={t("translation:About.Instrument")}
                 skills={Instrument}
-                color="#9ccef1"
+                color="#e6ddff"
               />
 
               <SkillCategory
                 title={t("translation:About.Music")}
                 skills={Music}
-                color="#9ccef1"
+                color="#b0f2c2"
               />
 
               <SkillCategory
                 title={t("translation:About.Photography")}
                 skills={Photography}
-                color="#9ccef1"
+                color="#ffd9e8"
               />
             </div>
           </div>
