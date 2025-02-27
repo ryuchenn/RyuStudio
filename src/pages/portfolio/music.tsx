@@ -1,10 +1,11 @@
 import React from 'react';
-import { musicCategories, musicAllImages } from "@/content/profolioCard";
+import { musicCategories, allImages } from "@/content/profolioCard";
 import PortfolioCard from "@/components/PortfolioCard";
 import { useTranslation } from 'react-i18next';
 
 const PortfolioMusic: React.FC = () => {
   const { t } = useTranslation(['translation', 'dynamicContent', 'commonVariables']); 
+  const musicImages = allImages.filter(image => image.type === "Music");
 
   return (
     <>
@@ -12,7 +13,7 @@ const PortfolioMusic: React.FC = () => {
         <PortfolioCard
           title={t("translation:Portfolio.Music")}
           categories={musicCategories.map((category) => category )}
-          allImages={musicAllImages}
+          allImages={musicImages}
         />
       </div>
     </>

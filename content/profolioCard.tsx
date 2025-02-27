@@ -2,72 +2,261 @@ export const photographyCategories = ["All", "Portrait", "Wedding", "Pet", "Even
 export const videographyCategories = ["All", "Movie", "MV", "Shorts"];
 export const musicCategories = ["All", "DJ", "PA", "MV", "Recording", "Composition"];
 
-export const photographyAllImages = [
-  { id: 1, category: ["Portrait", "Wedding"], src: "/assets/test/Test9.jpg", title: "Portrait 1" },
-  { id: 2, category: ["Portrait", "Wedding"], src: "/assets/test/Test8.jpg", title: "Portrait 2" },
-  { id: 3, category: ["Pet"], src: "/assets/test/Test1.jpg", title: "Pet 1" },
-  { id: 4, category: ["Event"], src: "/assets/test/Test2.jpg", title: "Event 1" },
-  { id: 5, category: ["Wedding"], src: "/assets/test/Test3.jpg", title: "Wedding 1" },
-  { id: 6, category: ["Other"], src: "/assets/test/Test4.jpg", title: "Other 2" },
-  { id: 7, category: ["Wedding"], src: "/assets/test/Test7.jpg", title: "Wedding 2" },
-  { id: 8, category: ["Product"], src: "/assets/test/Test5.jpg", title: "Product 1" },
-  { id: 9, category: ["Event"], src: "/assets/test/Test6.jpg", title: "Event 2" },
-  { id: 10, category:["Pet"], src: "/assets/test/Test10.jpg", title: "Pet 2" },
-  { id: 11, category:["Product"], src: "/assets/test/Test0-1.webp", title: "Product 2" },
+export const allImages = [
+  //////////////// Photography ////////////////
+  { id: 1, type: "Photography", category: ["Portrait", "Wedding"], src: "/assets/test/Test9.jpg", title: "Portrait 1" },
+  { id: 2, type: "Photography", category: ["Portrait", "Wedding"], src: "/assets/test/Test8.jpg", title: "Portrait 2" },
+  { id: 3, type: "Photography", category: ["Pet"], src: "/assets/test/Test1.jpg", title: "Pet 1" },
+  { id: 4, type: "Photography", category: ["Event"], src: "/assets/test/Test2.jpg", title: "Event 1" },
+  { id: 5, type: "Photography", category: ["Wedding"], src: "/assets/test/Test3.jpg", title: "Wedding 1" },
+  { id: 6, type: "Photography", category: ["Other"], src: "/assets/test/Test4.jpg", title: "Other 2" },
+  { id: 7, type: "Photography", category: ["Wedding"], src: "/assets/test/Test7.jpg", title: "Wedding 2" },
+  { id: 8, type: "Photography", category: ["Product"], src: "/assets/test/Test5.jpg", title: "Product 1" },
+  { id: 9, type: "Photography", category: ["Event"], src: "/assets/test/Test6.jpg", title: "Event 2" },
+  { id: 10, type: "Photography", category:["Pet"], src: "/assets/test/Test10.jpg", title: "Pet 2" },
+  { id: 11, type: "Photography", category:["Product"], src: "/assets/test/Test0-1.webp", title: "Product 2" },
 
-  // { id: 12, category: ["Portrait", "Wedding"], src: "/assets/test/Test9.jpg", title: "Portrait 1" },
-  // { id: 13, category: ["Portrait", "Wedding"], src: "/assets/test/Test8.jpg", title: "Portrait 2" },
-  // { id: 14, category: ["Pet"], src: "/assets/test/Test1.jpg", title: "Pet 1" },
-  // { id: 15, category: ["Event"], src: "/assets/test/Test2.jpg", title: "Event 1" },
-  // { id: 16, category: ["Wedding"], src: "/assets/test/Test3.jpg", title: "Wedding 1" },
-  // { id: 17, category: ["Other"], src: "/assets/test/Test4.jpg", title: "Other 2" },
-  // { id: 18, category: ["Wedding"], src: "/assets/test/Test7.jpg", title: "Wedding 2" },
-  // { id: 19, category: ["Product"], src: "/assets/test/Test5.jpg", title: "Product 1" },
-  // { id: 20, category: ["Event"], src: "/assets/test/Test6.jpg", title: "Event 2" },
-  // { id: 21, category:["Pet"], src: "/assets/test/Test10.jpg", title: "Pet 2" },
-  // { id: 22, category:["Product"], src: "/assets/test/Test0-1.webp", title: "Product 2" },
-];
+  //////////////// Videography ////////////////
+  { id: 12, type: "Videography", category: ["Movie"], src: "/assets/test/Test7.jpg", title: "Video 1" },
+  { id: 13, type: "Videography", category: ["MV"], src: "/assets/test/Test10.jpg", title: "Video 2" },
+  { id: 14, type: "Videography", category: ["Shorts"], src: "/assets/test/Test6.jpg", title: "Video 3" },
 
-export const videographyAllImages = [
-  { id: 1, category: ["Movie"], src: "/assets/test/Test7.jpg", title: "Video 1" },
-  { id: 2, category: ["MV"], src: "/assets/test/Test10.jpg", title: "Video 2" },
-  { id: 3, category: ["Shorts"], src: "/assets/test/Test6.jpg", title: "Video 3" },
-];
-
-export const musicAllImages = [
-  { id: 1, category: ["DJ"], src: "/assets/test/Test9.jpg", title: "Music 1" },
-  { id: 2, category: ["PA"], src: "/assets/test/Test8.jpg", title: "Music 2" },
-  { id: 3, category: ["Recording"], src: "/assets/test/Test5.jpg", title: "Music 1" },
-];
-
+  //////////////// Music ////////////////
+  { id: 15, type: "Music", category: ["DJ"], src: "/assets/test/Test9.jpg", title: "Music 1" },
+  { id: 16, type: "Music", category: ["PA"], src: "/assets/test/Test8.jpg", title: "Music 2" },
+  { id: 17, type: "Music", category: ["Recording"], src: "/assets/test/Test5.jpg", title: "Music 1" },
+]
 
 export const detailAllImages = [
-    {
-      id: 1,
-      category: "Portrait",
-      title: "Portrait 1",
-      images: [
-        "/assets/test/BookA.png",
-        "/assets/test/BookA.png",
-        "/assets/test/BookA.png",
-      ],
-    },
-    {
-      id: 2,
-      category: "Portrait",
-      title: "Portrait 2",
-      images: ["/images/portrait2_1.jpg", "/images/portrait2_2.jpg"],
-    },
-    {
-      id: 3,
-      category: "Wedding",
-      title: "Wedding 1",
-      images: ["/images/wedding1_1.jpg", "/images/wedding1_2.jpg"],
-    },
-    {
-      id: 4,
-      category: "Pet",
-      title: "Pet 1",
-      images: ["/images/pet1_1.jpg", "/images/pet1_2.jpg"],
-    },
+  ////////////////////////////////////////////////
+  //////////////// Photography ////////////////
+  ////////////////////////////////////////////////
+  {
+    id: 1,
+    title: "Portrait 1",
+    images: [
+      "/assets/test/Test9.jpg",
+    ],
+    content: (
+      <p>
+        This is a text description for Portrait.
+      </p>
+    ),
+  },
+  {
+    id: 2,
+    title: "Portrait 2",
+    images: [
+      "/assets/test/Test8.jpg",
+    ],
+    content: (
+      <p>
+        This is a text description for Portrait.
+      </p>
+    ),
+  },
+  {
+    id: 3,
+    title: "Pet 1",
+    images: [
+      "/assets/test/Test1.jpg",
+    ],
+    content: (
+      <p>
+        This is a text description for Portrait.
+      </p>
+    ),
+  },
+  {
+    id: 4,
+    title: "Event 1",
+    images: [
+      "/assets/test/Test2.jpg",
+    ],
+    content: (
+      <p>
+        This is a text description for Portrait.
+      </p>
+    ),
+  },
+  {
+    id: 5,
+    title: "Wedding 1",
+    images: [
+      "/assets/test/Test3.jpg",
+    ],
+    content: (
+      <p>
+        This is a text description for Portrait.
+      </p>
+    ),
+  },
+  {
+    id: 6,
+    title: "Other 2",
+    images: [
+      "/assets/test/Test4.jpg",
+    ],
+    content: (
+      <p>
+        This is a text description for Portrait.
+      </p>
+    ),
+  },
+  {
+    id: 7,
+    title: "Wedding 2",
+    images: [
+      "/assets/test/Test7.jpg",
+    ],
+    content: (
+      <p>
+        This is a text description for Portrait.
+      </p>
+    ),
+  },
+  {
+    id: 8,
+    title: "Product 1",
+    images: [
+      "/assets/test/Test5.jpg",
+    ],
+    content: (
+      <p>
+        This is a text description for Portrait.
+      </p>
+    ),
+  },
+  {
+    id: 9,
+    title: "Event 2",
+    images: [
+      "/assets/test/Test6.jpg",
+    ],
+    content: (
+      <p>
+        This is a text description for Portrait.
+      </p>
+    ),
+  },
+  {
+    id: 10,
+    title: "Pet 2",
+    images: [
+      "/assets/test/Test10.jpg",
+    ],
+    content: (
+      <p>
+        This is a text description for Portrait.
+      </p>
+    ),
+  },
+  {
+    id: 11,
+    title: "Product 2",
+    images: [
+      "/assets/test/Test0-1.webp",
+    ],
+    content: (
+      <p>
+        This is a text description for Portrait.
+      </p>
+    ),
+  },
+  
+  ////////////////////////////////////////////////
+  //////////////// Videography ////////////////
+  ////////////////////////////////////////////////
+  {
+    id: 12,
+    title: "Videography 1",
+    images: ["/assets/test/Test7.jpg"],
+    content: (
+      <iframe
+        width="100%"
+        height="315"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        title="YouTube video player"
+        allowFullScreen
+      ></iframe>
+    ),
+  },
+  {
+    id: 13,
+    title: "Video 2",
+    images: ["/assets/test/Test10.jpg"],
+    content: (
+      <iframe
+        width="100%"
+        height="315"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        title="YouTube video player"
+        allowFullScreen
+      ></iframe>
+    ),
+  },
+  {
+    id: 14,
+    title: "Video 3",
+    images: ["/assets/test/Test6.jpg"],
+    content: (
+      <iframe
+        width="100%"
+        height="315"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        title="YouTube video player"
+        allowFullScreen
+      ></iframe>
+    ),
+  },
+
+  ////////////////////////////////////////////////
+  //////////////// Music ////////////////
+  ////////////////////////////////////////////////
+  {
+    id: 15,
+    category: "DJ",
+    title: "Music 1",
+    images: ["/assets/test/Test9.jpg"],
+    content: (
+      <iframe
+        width="100%"
+        height="315"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        title="YouTube video player"
+        allowFullScreen
+      ></iframe>
+    ),
+  },
+  {
+    id: 16,
+    category: "PA",
+    title: "Video 2",
+    images: ["/assets/test/Test8.jpg"],
+    content: (
+      <iframe
+        width="100%"
+        height="315"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        title="YouTube video player"
+        allowFullScreen
+      ></iframe>
+    ),
+  },
+  {
+    id: 17,
+    category: "Recording",
+    title: "Music 3",
+    images: ["/assets/test/Test5.jpg"],
+    content: (
+      <iframe
+        width="100%"
+        height="315"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        title="YouTube video player"
+        allowFullScreen
+      ></iframe>
+    ),
+  },
 ];
+

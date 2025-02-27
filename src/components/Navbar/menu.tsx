@@ -26,10 +26,10 @@ export const MENU_ITEMS = [
         title: "Project",
         route: "/project",
     },
-    {
-        title: "Event",
-        route: "/event",
-    },
+    // {
+    //     title: "Event",
+    //     route: "/event",
+    // },
     {
         title: "About",
         route: "/about",

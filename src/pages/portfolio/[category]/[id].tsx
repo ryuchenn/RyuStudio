@@ -35,22 +35,9 @@ const ImageDetailsPage = () => {
         ))}
       </div>
 
-      {/* <div className={styles.relatedImages}>
-        {allImages
-          .filter((img) => img.category === category && img.id !== id)
-          .map((related) => (
-            <div
-              key={related.id}
-              className={styles.relatedItem}
-            >
-              <img
-                src={related.images[0]} 
-                alt={related.title}
-                className={styles.relatedImage}
-              />
-            </div>
-          ))}
-      </div> */}
+      <div className={styles.content}>
+        {imageSet.content}
+      </div>
     </div>
   );
 };
