@@ -100,9 +100,9 @@ const HomePage = () => {
                     <div className={styles.studioText}>
                         <h2 className={styles.studioSubtitle}>{t("translation:Home.ShortTitle2")}</h2>
                         <p className={styles.studioDescription}>{t("translation:Home.StudioDescription2")}</p>
-                        <button className={styles.studioButton}>
-                            <Link href="/contact">{t("translation:Home.Contact")}</Link>
-                        </button>
+                        <Link href="/contact" className={styles.studioButton}>
+                            {t("translation:Home.Contact")}
+                        </Link>
                     </div>
                     <div className={styles.studioImageWrapper}>
                         <Image
@@ -130,9 +130,9 @@ const HomePage = () => {
                     <div className={styles.studioText}>
                         <h2 className={styles.studioSubtitle}>{t("translation:Home.ShortTitle3")}</h2>
                         <p className={styles.studioDescription}>{t("translation:Home.StudioDescription3")}</p>
-                        <button className={styles.studioButton}>
-                            <Link href="/studio/musicA">{t("translation:Home.Learn")}</Link>
-                        </button>
+                        <Link href="/studio/musicA" className={styles.studioButton}>
+                            {t("translation:Home.Learn")}
+                        </Link>
                     </div>
                     {isMobile && (
                         <div className={styles.studioImageWrapper}>

@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { projects, techStacks, tags } from "@/content/project";
+import { IoEarthOutline } from "react-icons/io5";
+import { FaGithub } from "react-icons/fa";
 import styles from "./index.module.scss";
 import { useTranslation } from 'react-i18next';
 import Image from "next/image";
 
 const ProjectsForm = () => {
-  const { t } = useTranslation(['translation', 'dynamicContent', 'commonVariables']); 
+  const { t } = useTranslation(['translation', 'dynamicContent', 'commonVariables']);
   const [searchText, setSearchText] = useState("");
   const [selectedTechStacks, setSelectedTechStacks] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -72,9 +74,8 @@ const ProjectsForm = () => {
                 <button
                   key={tech}
                   onClick={() => toggleTechStack(tech)}
-                  className={`${styles.filterOption} ${
-                    selectedTechStacks.includes(tech) ? styles.selected : ""
-                  }`}
+                  className={`${styles.filterOption} ${selectedTechStacks.includes(tech) ? styles.selected : ""
+                    }`}
                 >
                   {tech}
                 </button>
@@ -89,9 +90,8 @@ const ProjectsForm = () => {
                 <button
                   key={tag}
                   onClick={() => toggleTag(tag)}
-                  className={`${styles.filterOption} ${
-                    selectedTags.includes(tag) ? styles.selected : ""
-                  }`}
+                  className={`${styles.filterOption} ${selectedTags.includes(tag) ? styles.selected : ""
+                    }`}
                 >
                   {tag}
                 </button>
@@ -106,12 +106,29 @@ const ProjectsForm = () => {
         {filteredProjects.map((project) => (
           <div key={project.id} className={styles.projectCard}>
             <Image
-                src={project.image}
-                alt={project.title}
-                className={styles.projectImage}
-                width={500} height={500} priority
+              src={project.image}
+              alt={project.title}
+              className={styles.projectImage}
+              width={500} height={500} priority
             ></Image>
-            <h3 className={styles.projectTitle}>{project.title}</h3>
+
+            <div className={styles.demoLinks}>
+              <h3 className={styles.projectTitle}>{project.title}</h3>
+              <div className={styles.demoButtons}>
+                {project.demoLink1 && (
+                  <a href={project.demoLink1} target="_blank" rel="noopener noreferrer" className={styles.demoButton}>
+                    <IoEarthOutline />
+                  </a>
+                )}
+                {project.demoLink2 && (
+                  <a href={project.demoLink2} target="_blank" rel="noopener noreferrer" className={styles.demoButton}>
+                    <FaGithub />
+                  </a>
+                )}
+              </div>
+            </div>
+            <p className={styles.description}>{project.description}</p>
+            <hr className={styles.hr}></hr>
             <div className={styles.projectTechStack}>
               {project.techStack.map((tech) => (
                 <span key={tech} className={styles.projectTech}>
@@ -119,7 +136,7 @@ const ProjectsForm = () => {
                 </span>
               ))}
             </div>
-            <p>{project.description}</p>
+            <hr className={styles.hr}></hr>
             <div className={styles.projectTags}>
               {project.tags.map((tag) => (
                 <span key={tag} className={styles.projectTag}>
