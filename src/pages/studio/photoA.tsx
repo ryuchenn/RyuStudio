@@ -10,7 +10,7 @@ const StudioPhotoA: React.FC = () => {
   return (
     <TabSection
       images={images}
-      tabContent={tabContent}
+      tabContent={tabContent(t)}
       styles={styles}
       titleKey={t("translation:Studio.PhotoStudioTitle")}
     />

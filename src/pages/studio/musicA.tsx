@@ -11,7 +11,7 @@ const StudioMusicA: React.FC = () => {
         <>
             <TabSection
                 images={images}
-                tabContent={tabContent}
+                tabContent={tabContent(t)}
                 styles={styles}
                 titleKey={t("translation:Studio.MusicStudioTitle")}
             />

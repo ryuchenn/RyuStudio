@@ -100,3 +100,61 @@
     margin: 0 auto;
   }
   
+/////////////////////////////////////////// Tab content
+
+  /* Tab Section Styles */
+.tabContentContainer {
+  padding: 2rem;
+  text-align: center;
+}
+
+.tabTitle {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.tabDescription {
+  font-size: 1.2rem;
+  color: #444;
+  margin-bottom: 1.5rem;
+}
+
+.tabList {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+.tabList li {
+  font-size: 1rem;
+  background-color: #f3f4f6;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border-radius: 5px;
+}
+
+/* Floor Plan Image */
+.tabImage {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Pricing Table */
+.tabTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.tabTable th, .tabTable td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.tabTable th {
+  background-color: #f9fafb;
+  font-weight: bold;
+}
