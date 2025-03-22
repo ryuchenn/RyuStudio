@@ -4,7 +4,7 @@
 </div>
 
 This is my studio website built by NEXT.js, Typescript and SCSS. 
-Click [Here](https://studio-website-isn2xbim0-ryuchens-projects.vercel.app/) to check out my studio portfolio!
+Click [Here](https://studio-website-topaz.vercel.app/) to check out my studio portfolio!
 
 ## File Structure
 ```
