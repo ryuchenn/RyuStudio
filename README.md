@@ -1,6 +1,6 @@
 # Studio Portfolio
 <div align="center">
-    <img src="public/git/Home.png" alt="Home"/>
+    <img src="git/pic/Home.png" alt="Home"/>
 </div>
 
 This is my studio website built by NEXT.js, Typescript and SCSS. 
