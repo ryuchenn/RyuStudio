@@ -1,0 +1,1 @@
+Put the Firebase private key JSON file at this file.
