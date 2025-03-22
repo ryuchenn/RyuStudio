@@ -15,7 +15,7 @@ export const projects = [
       image: "/assets/content/project/Studio_Home.png",
       techStack: ["Next.js", "TypeScript"],
       tags: ["Web Development"],
-      demoLink1: "https://studio-website-omega.vercel.app/",
+      demoLink1: "https://studio-website-topaz.vercel.app/",
       demoLink2: "https://github.com/ryuchenn/Studio-Website",
       description:
           "The portfolio website for web&mobile development, photography, and music freelancing in Toronto.",
