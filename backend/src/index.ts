@@ -3,11 +3,13 @@ dotenv.config();
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
+import bodyParser from 'body-parser';
 import registerRoutes from "./routes/index"; 
 const port = process.env.DB_DEFAULT_PORT || 3000;
 const app = express();
   
 app.use(cors());
+app.use(bodyParser.json());
 app.use(morgan("dev"));
 app.use(express.json());
 
@@ -15,7 +17,7 @@ registerRoutes(app); // API Router
 
 app.get("/", (req, res) => {
   res.json({
-    message: "Welcome to the Studio Backend System"
+    message: " to the Studio Backend System"
   });
 });
 
