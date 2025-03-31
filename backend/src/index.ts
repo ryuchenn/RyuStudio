@@ -17,7 +17,7 @@ registerRoutes(app); // API Router
 
 app.get("/", (req, res) => {
   res.json({
-    message: " to the Studio Backend System"
+    message: "Welcome to the Studio Backend System"
   });
 });
 
