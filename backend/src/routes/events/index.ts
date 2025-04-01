@@ -247,6 +247,7 @@ router.post(
 
 /**
  * GET /eventOrder/:accountID
+ * Using in page UserEventScreen -> UserEventDetailScreen
  * Get the eventOrder data by account.id
  * Also, using the eventID to find the fields detail from event collection.
  * QRCode Column Format: ticketDoc.id+++ticketData.sessionID，ex："KmiMgvdCpbfzHL7Yv9zC+++sess_hQ7kNzLmBpy93KrX"
@@ -312,6 +313,58 @@ router.get(
 );
 
 /**
+ * GET /eventOrderDetail/:orderID
+ * Using in page EventThankyou -> UserEventDetailScreen
+ * Get the event collection data by eventOrder.id and eventOrder.eventID
+ * QRCode Column Format: ticketDoc.id+++ticketData.sessionID，ex："KmiMgvdCpbfzHL7Yv9zC+++sess_hQ7kNzLmBpy93KrX"
+ */
+router.get(
+  "/eventOrderDetail/:orderID",
+  async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { orderID } = req.params;
+
+      const orderDoc = await authDb.collection("eventOrder").doc(orderID).get();
+      if (!orderDoc.exists) {
+        res.status(404).json({ message: "Order not found" });
+        return;
+      }
+
+      const orderData = orderDoc.data();
+      if (!orderData) {
+        res.status(500).json({ message: "No order data available" });
+        return;
+      }
+      orderData.id = orderDoc.id;
+
+      // Get event collection data by orderData.eventID
+      const eventDoc = await eventDb
+        .collection("event")
+        .doc(orderData.eventID)
+        .get();
+      if (eventDoc.exists) {
+        orderData.event = { id: eventDoc.id, ...eventDoc.data() };
+      }
+
+      // Get ticket subcollection fields
+      const ticketsSnapshot = await orderDoc.ref.collection("ticket").get();
+      const tickets = ticketsSnapshot.docs.map((doc) => {
+        const ticket = doc.data();
+        ticket.id = doc.id;
+        ticket.QRCode = `${doc.id}+++${ticket.sessionID}`;
+        return ticket;
+      });
+      orderData.tickets = tickets;
+
+      res.status(200).json(orderData);
+    } catch (error) {
+      console.error("Error fetching order detail:", error);
+      res.status(500).json({ message: "Failed to fetch order detail", error });
+    }
+  }
+);
+
+/**
  * GET /eventOrderTicketCheck
  * FOR checking ticket is exists in database. Checking by ticket.id and session.id
  */
@@ -340,12 +393,10 @@ router.get(
 
       // Checking ticket's fields is exist session.id
       if (ticketData.sessionID === sessionID) {
-        return res
-          .status(200)
-          .json({
-            message: "Ticket check passed",
-            ticket: { id: ticketDoc.id, ...ticketData },
-          });
+        return res.status(200).json({
+          message: "Ticket check passed",
+          ticket: { id: ticketDoc.id, ...ticketData },
+        });
       } else {
         return res.status(400).json({ message: "SessionID does not match" });
       }

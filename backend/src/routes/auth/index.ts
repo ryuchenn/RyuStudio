@@ -148,4 +148,29 @@ router.get('/checkToken', async (req: Request, res: Response): Promise<any> => {
   }
 });
 
+/**
+ * GET /checkToken
+ * Get the host profile information.
+ */
+router.get('/hostProfile/:accountID', async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { accountID } = req.params;
+    const accountDoc = await authDb.collection('account').doc(accountID).get();
+    if (!accountDoc.exists) {
+      res.status(404).json({ message: 'Account not found' });
+      return;
+    }
+    const accountData = accountDoc.data();
+    console.log(accountData)
+    res.status(200).json({
+      displayName: accountData?.displayName,
+      phoneNumber: accountData?.phoneNumber,
+      pictureURL: accountData?.pictureURL,
+    });
+  } catch (error) {
+    console.error('Error fetching host profile:', error);
+    res.status(500).json({ message: 'Failed to fetch host profile', error });
+  }
+});
+
 export default router;
