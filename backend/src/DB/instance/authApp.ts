@@ -1,4 +1,4 @@
-import admin from 'firebase-admin';
+import admin from "firebase-admin";
 import { serviceAuthBase64 } from "../../constants/DBSetting";
 
 if (!serviceAuthBase64) {
@@ -16,8 +16,12 @@ const authApp = admin.initializeApp(
   "auth"
 );
 
+/**
+ * Different Auth Database services
+ */
 const authDb = authApp.firestore();
+const authAuth = authApp.auth();
 const authMessaging = authApp.messaging();
 const authStorage = authApp.storage();
 
-export { authDb, authMessaging, authStorage };
+export { authDb, authAuth, authMessaging, authStorage };

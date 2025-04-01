@@ -47,7 +47,7 @@ export const mockEvents = [
     },
     tags: ["Portraits", "Outdoor", "Golden Hour", "Canada Events"],
     eventDetail:
-      "<h2><strong style='color: #e67e22;'>Join our rooftop portrait shoot!</strong></h2><p>Capture stunning portraits with golden-hour light. <a href='https://example.com'>Book Now</a></p><iframe width='560' height='315' src='https://www.youtube.com/embed/dQw4w9WgXcQ' frameborder='0' allowfullscreen></iframe>",
+      "<h2><strong style='color: #e67e22;'>Join our rooftop portrait shoot!</strong></h2><p>Capture stunning portraits with golden-hour light. <a href='https://example.com'>Book Now</a></p><iframe width='325' height='315' src='https://www.youtube.com/embed/dQw4w9WgXcQ' frameborder='0' allowfullscreen></iframe>",
     imagesURL: [
       "https://secure.meetupstatic.com/photos/event/9/6/0/3/600_526478403.webp?w=750",
       "https://secure.meetupstatic.com/photos/event/9/6/0/3/600_526478403.webp?w=750",
@@ -124,7 +124,7 @@ export const mockEvents = [
     },
     tags: ["Music", "DJ", "Party", "Indoor", "Nightlife"],
     eventDetail:
-      "<h2><strong>Live Music & Loft Vibes</strong></h2><p>Join Toronto's underground music scene. Dance, vibe, and network!</p><iframe width='560' height='315' src='https://www.youtube.com/embed/YOUR_VIDEO_ID' frameborder='0' allowfullscreen></iframe>",
+      "<h2><strong>Live Music & Loft Vibes</strong></h2><p>Join Toronto's underground music scene. Dance, vibe, and network!</p><iframe width='325' height='315' src='https://www.youtube.com/embed/YOUR_VIDEO_ID' frameborder='0' allowfullscreen></iframe>",
     imagesURL: [
       "https://example.com/images/dj1.jpg",
       "https://example.com/images/dj2.jpg",

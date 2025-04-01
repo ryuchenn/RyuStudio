@@ -16,6 +16,9 @@ const eventApp = admin.initializeApp(
   "event"
 );
 
+/**
+ * Different Events Database services
+ */
 const eventDb = eventApp.firestore();
 const eventMessaging = eventApp.messaging();
 const eventStorage = eventApp.storage();
