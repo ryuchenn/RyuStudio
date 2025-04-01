@@ -4,7 +4,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import noPic from '@/assets/images/NoPic.png';
 import DateHelper from '@/helpers/DateHelper';
 import GlobalTheme from '@/styles/Global';
-
+import tagColors from 'constants/TagColors';
+import tagList from 'constants/TagList';
 interface EventCardProps {
   event: any;
   onPress: () => void;
@@ -51,11 +52,15 @@ const EventCard: React.FC<EventCardProps> = ({ event, onPress }) => {
 
       {/* Tags */}
       <View style={styles.tagContainer}>
-        {event.tags.map((tag: string, index: number) => (
-          <View style={styles.tag} key={index}>
-            <Text style={styles.tagText}>{tag}</Text>
-          </View>
-        ))}
+        {event.tags.map((tag: string, index: number) => {
+          const tagIndex = tagList.indexOf(tag);
+          const color = tagIndex >= 0 ? tagColors[tagIndex % tagColors.length] : GlobalTheme.background;
+          return (
+            <View key={index} style={[styles.tag, { backgroundColor: color }]}>
+              <Text style={styles.tagText}>{tag}</Text>
+            </View>
+          );
+        })}
       </View>
     </TouchableOpacity>
   );

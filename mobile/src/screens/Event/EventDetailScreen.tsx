@@ -54,7 +54,7 @@ const EventDetailScreen: React.FC<EventDetailProps> = ({ route, navigation }) =>
   const toggleFavorite = async () => {
     const uid = await AsyncStorage.getItem('uid');
     if (!uid) {
-      Alert.alert('Error', 'Please sign in to use this feature.');
+      requireLogin(handleAction)
       return;
     }
     try {
@@ -150,29 +150,30 @@ const EventDetailScreen: React.FC<EventDetailProps> = ({ route, navigation }) =>
       headerRight: () => (
         <View style={{ flexDirection: 'row', marginRight: 10 }}>
 
-          {/* Favorite */}
-          <TouchableOpacity style={{ marginHorizontal: 10 }} onPress={toggleFavorite}>
-            <Icon name={isFavorite ? "heart" : "heart-o"} size={20} color={GlobalTheme.primary} />
-          </TouchableOpacity>
+          {/* Admin Only Block */}
+          {user && user.role && user.role.toLowerCase() === 'admin' && (
+            <>
+              {/* Delete */}
+              <TouchableOpacity style={{ marginHorizontal: 10 }} onPress={handleDelete}>
+                  <Icon name="trash" size={20} color={GlobalTheme.danger} />
+              </TouchableOpacity>
+
+              {/* Edit */}
+              <TouchableOpacity style={{ marginHorizontal: 10 }} onPress={handleEdit}>
+                <Icon name="edit" size={20} color={GlobalTheme.primary} />
+              </TouchableOpacity>
+            </>
+          )}
 
           {/* Share */}
           <TouchableOpacity style={{ marginHorizontal: 10 }} onPress={handleShare}>
             <Icon name="share-alt" size={20} color={GlobalTheme.primary} />
           </TouchableOpacity>
 
-          {user && user.role && user.role.toLowerCase() === 'admin' && (
-            <>
-              {/* Edit */}
-              <TouchableOpacity style={{ marginHorizontal: 10 }} onPress={handleEdit}>
-                <Icon name="edit" size={20} color={GlobalTheme.primary} />
-              </TouchableOpacity>
-
-              {/* Delete */}
-              <TouchableOpacity style={{ marginHorizontal: 10 }} onPress={handleDelete}>
-                <Icon name="trash" size={20} color={GlobalTheme.danger} />
-              </TouchableOpacity>
-            </>
-          )}
+          {/* Favorite */}
+          <TouchableOpacity style={{ marginHorizontal: 10 }} onPress={toggleFavorite}>
+            <Icon name={isFavorite ? "bookmark" : "bookmark-o"} size={20} color={GlobalTheme.primary} />
+          </TouchableOpacity>
         </View>
       ),
     });
@@ -221,9 +222,14 @@ const EventDetailScreen: React.FC<EventDetailProps> = ({ route, navigation }) =>
           {event.session.map((sess: any, index: number) => (
             <View key={index} style={styles.sessionCard}>
               <View style={styles.sessionRow}>
+                <Icon name="star" size={14} color={GlobalTheme.gray2} style={styles.sessionIcon} />
+                <Text style={styles.sessionLabel}>Type:</Text>
+                <Text style={styles.sessionText}>{sess.type}</Text>
+              </View>
+              <View style={styles.sessionRow}>
                 <Icon name="dollar" size={14} color={GlobalTheme.gray2} style={styles.sessionIcon} />
                 <Text style={styles.sessionLabel}>Price:</Text>
-                <Text style={styles.sessionText}>{`$${sess.price}`}</Text>
+                <Text style={styles.sessionText}>{`$ ${sess.price}`} CAD</Text>
               </View>
               <View style={styles.sessionRow}>
                 <Icon name="users" size={14} color={GlobalTheme.gray2} style={styles.sessionIcon} />
@@ -336,6 +342,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: GlobalTheme.gray2,
     marginRight: 4,
+    fontWeight: 'bold',
   },
   sessionText: {
     fontSize: 12,

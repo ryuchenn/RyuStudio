@@ -1,5 +1,7 @@
+
 const GlobalTheme = {
   primary: "#ffa21f", // Button
+  lightprimary: "#FFC78E",
   secondary: "#ffa21f",
   background: "#f9f9f9",
   text: "#333333",
@@ -22,6 +24,17 @@ const GlobalTheme = {
   
   midBlue: "#2828FF",
   green: "#28a745", // Success
+};
+
+export const DefaultHeaderOptions = {
+  headerStyle: {
+    backgroundColor: GlobalTheme.white, // header backgroundcolor
+  },
+  headerTintColor: GlobalTheme.primary, // title & icon
+  headerTitleStyle: {
+    color: GlobalTheme.gray4, // Title color
+    fontWeight: 'bold' as const,
+  },
 };
 
 export default GlobalTheme;

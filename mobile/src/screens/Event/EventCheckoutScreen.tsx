@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput, StyleSheet, Alert, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon2 from 'react-native-vector-icons/Ionicons';
+import Icon3 from 'react-native-vector-icons/MaterialIcons';
+import Icon4 from 'react-native-vector-icons/AntDesign';
 import { CardField } from '@stripe/stripe-react-native';
 import { WebView } from 'react-native-webview';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -117,7 +120,7 @@ const EventCheckoutScreen: React.FC = ({ route, navigation }: any) => {
 
           {/* Ticket Options */}
           <View style={styles.sectionRow}>
-            <Icon name="clock-o" size={16} color={GlobalTheme.gray2} style={styles.sectionIcon} />
+            <Icon2 name="ticket-outline" size={22} color={GlobalTheme.gray2} style={styles.sectionIcon} />
             <Text style={styles.sectionLabel}>Ticket Options</Text>
           </View>
 
@@ -134,18 +137,19 @@ const EventCheckoutScreen: React.FC = ({ route, navigation }: any) => {
 
               {/* Ticket Type */}
               <View style={styles.sessionRow}>
-                <Text style={styles.sessionOptionText}>{sess.type}</Text>
+                <Text style={styles.sessionOptionTitle}>{sess.type}</Text>
               </View>
 
               {/* Price */}
               <View style={styles.sessionRow}>
-                <Text style={styles.sessionOptionText}>${sess.price} CAD</Text>
+                <Text style={styles.sessionOptionText}>$ {sess.price} CAD</Text>
               </View>
 
               {/* Date */}
               <View style={styles.sessionDateRow}>
                 <Text style={styles.sessionOptionText}>
-                  {DateHelper.formatDateWithoutYear(sess.startDate, true)} ~ {DateHelper.formatDateWithoutYear(sess.endDate, true)}
+                  {DateHelper.formatDateWithoutYear(sess.startDate, true)}
+                  {/* ~ {DateHelper.formatDateWithoutYear(sess.endDate, true)} */}
                 </Text>
               </View>
               <SectionDivider />
@@ -185,7 +189,10 @@ const EventCheckoutScreen: React.FC = ({ route, navigation }: any) => {
 
         {/* Coupon */}
         <View style={styles.section}>
-          <Text style={styles.sectionLabel}>Promo Code</Text>
+          <View style={styles.sectionRow}>
+            <Icon3 name="discount" size={20} color={GlobalTheme.gray2} style={styles.sectionIcon} />
+            <Text style={styles.sectionLabel}>Promo Code</Text>
+          </View>
           <TextInput
             style={styles.textInput}
             placeholder="Enter Promo Code"
@@ -196,7 +203,10 @@ const EventCheckoutScreen: React.FC = ({ route, navigation }: any) => {
 
         {/* Payment method */}
         <View style={styles.section}>
-          <Text style={styles.sectionLabel}>Payment</Text>
+          <View style={styles.sectionRow}>
+            <Icon4 name="creditcard" size={20} color={GlobalTheme.gray2} style={styles.sectionIcon} />
+            <Text style={styles.sectionLabel}>Payment</Text>
+          </View>
           <View style={styles.paymentMethods}>
             <TouchableOpacity
               style={[styles.paymentOption, paymentMethod === 'Stripe' && styles.paymentOptionSelected]}
@@ -253,7 +263,7 @@ const EventCheckoutScreen: React.FC = ({ route, navigation }: any) => {
                 }}
                 style={styles.cardField}
                 onCardChange={(cardDetails) => {
-                  console.log('Card details:', cardDetails);
+                  // console.log('Card details:', cardDetails);
                 }}
               />
             </View>
@@ -262,7 +272,7 @@ const EventCheckoutScreen: React.FC = ({ route, navigation }: any) => {
           {/* Paypal Block */}
           {paymentMethod === 'Paypal' && (
             <View style={styles.paymentDetail}>
-              <Text style={styles.paymentDetailText}>Paypal Simulation Form</Text>
+              <Text style={styles.paymentDetailText}>Paypal Form</Text>
             </View>
           )}
 
@@ -279,7 +289,7 @@ const EventCheckoutScreen: React.FC = ({ route, navigation }: any) => {
               </View>
               <View style={styles.webViewContainer}>
                 <WebView
-                  source={{ uri: 'https://forms.gle/zAa1SfVxHbXpoiqV6' }}
+                  source={{ uri: 'https://forms.gle/JKcDFsWT6kMmPD9N9' }}
                   style={styles.webView}
                 />
               </View>
@@ -336,11 +346,12 @@ const styles = StyleSheet.create({
   },
   sectionIcon: {
     marginRight: 6,
-    marginBottom: 10,
+    marginBottom: 5,
   },
   sectionLabel: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: 'bold',
+    marginBottom: 5,
   },
   textInput: {
     borderWidth: 1,
@@ -375,7 +386,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: GlobalTheme.gray1,
     borderRadius: 4,
-    backgroundColor: GlobalTheme.lightGray,
+    backgroundColor: GlobalTheme.background,
   },
   paymentDetailText: {
     fontSize: 14,
@@ -411,9 +422,15 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     marginHorizontal: 10,
   },
-  sessionOptionSelected: {
+  sessionOptionSelected: { // Ticket Options: selected color and border
     // borderColor: GlobalTheme.black,
     // backgroundColor: GlobalTheme.primary,
+  },
+  sessionOptionTitle: {
+    fontWeight: 'bold',
+    fontSize: 19,
+    color: GlobalTheme.gray4,
+    marginBottom: 4,
   },
   sessionOptionText: {
     fontSize: 14,

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet, Platform, UIManager, LayoutAnimation, Modal, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon2 from 'react-native-vector-icons/Ionicons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import tagList from 'constants/TagList'; 
-import tagColors from 'constants/Color';
+import tagColors from 'constants/TagColors';
 import { StartDateOption } from 'constants/StartDateOption';
 import noticeOptions from 'constants/Notice';
 import GlobalTheme from '@/styles/Global';
@@ -117,7 +118,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
       <View style={styles.container}>
         <Icon name="search" size={20} style={styles.iconLeft} />
         <TextInput
-          placeholder="Search events..."
+          placeholder="Search Events"
           style={styles.input}
           value={query}
           onChangeText={setQuery}
@@ -134,7 +135,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 
         {/* Filter button at search bar */}
         <TouchableOpacity onPress={toggleFilter}>
-          <Icon name="filter" size={20} style={styles.iconRight} />
+          <Icon2 name="filter" size={20} style={styles.iconRight} />
         </TouchableOpacity>
       </View>
       
@@ -181,13 +182,13 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
               </View>
             </View>
 
-            {/* Start Date（Included "Choose Date" Option at here） */}
+            {/* Date（Included "Choose Date" Option at here） */}
             <ScrollView style={styles.sheetContent}>
               <TouchableOpacity 
                 onPress={() => setStartDateExpanded(!startDateExpanded)} 
                 style={styles.sectionHeader}
               >
-                <Text style={styles.sectionTitle}>Start Date</Text>
+                <Text style={styles.sectionTitle}>Date</Text>
                 <Icon name={startDateExpanded ? "chevron-up" : "chevron-down"} size={16} />
               </TouchableOpacity>
               {startDateExpanded && (
@@ -249,12 +250,12 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
                 </>
               )}
 
-              {/* Notice */}
+              {/* Notice (Info) */}
               <TouchableOpacity 
                 onPress={() => setNoticeExpanded(!noticeExpanded)} 
                 style={styles.sectionHeader}
               >
-                <Text style={styles.sectionTitle}>Notice</Text>
+                <Text style={styles.sectionTitle}>Info</Text>
                 <Icon name={noticeExpanded ? "chevron-up" : "chevron-down"} size={16} />
               </TouchableOpacity>
               {noticeExpanded && (
@@ -272,7 +273,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
                           isSelected && styles.noticeButtonSelected,
                         ]}
                       >
-                        <Text style={styles.noticeText}>{notice}</Text>
+                        <Text style={styles.noticeText}>{notice.charAt(0).toUpperCase() + notice.slice(1).toLowerCase()}</Text>
                       </TouchableOpacity>
                     );
                   })}
@@ -420,7 +421,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   clearButton: {
-    backgroundColor: 'red',
+    backgroundColor: GlobalTheme.danger,
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 8,
@@ -430,7 +431,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   cancelButton: {
-    backgroundColor: 'gray',
+    backgroundColor: GlobalTheme.gray2,
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 8,

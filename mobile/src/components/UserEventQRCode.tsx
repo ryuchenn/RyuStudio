@@ -37,7 +37,7 @@ const UserEventQRCode: React.FC<UserEventQRCodeProps> = ({ tickets }) => {
 
               {/* Date */}
               <Text style={styles.ticketInfo}>
-                {DateHelper.formatDate(ticket.sessionDetail.startDate, true)} ~ {DateHelper.formatDate(ticket.sessionDetail.endDate ? ticket.sessionDetail.endDate : "", true)}
+                {DateHelper.formatDate(ticket.sessionDetail.startDate, true)}
               </Text>
 
             </>
@@ -65,11 +65,13 @@ const styles = StyleSheet.create({
   statusText: {
     fontSize: 14,
     fontWeight: 'bold',
-    marginLeft: 10
+    marginLeft: 10,
+    marginBottom: 5,
   },
   ticketTitle: {
     fontSize: 16,
     fontWeight: 'bold',
+    marginBottom: 5,
   },
   ticketCard: {
     marginBottom: 80,

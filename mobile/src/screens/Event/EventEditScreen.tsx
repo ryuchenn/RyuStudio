@@ -107,7 +107,7 @@ const EventEditScreen: React.FC<EventEditScreenProps> = ({ route, navigation }) 
           }}
           style={{ marginLeft: 10 }}
         >
-          <Icon name="arrow-left" size={20} color={GlobalTheme.primary} />
+          <Icon name="chevron-left" size={20} color={GlobalTheme.primary} />
         </TouchableOpacity>
       ),
     });
@@ -404,7 +404,7 @@ const EventEditScreen: React.FC<EventEditScreenProps> = ({ route, navigation }) 
             <TouchableOpacity onPress={() => {
               setImagesURL(prev => prev.filter((_, i) => i !== index));
             }}>
-              <Icon name="trash" size={16} color="red" />
+              <Icon name="trash" size={16} color={GlobalTheme.danger} />
             </TouchableOpacity>
           </View>
         ))}
@@ -444,9 +444,9 @@ const pickerSelectStyles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 10,
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: GlobalTheme.gray2,
     borderRadius: 4,
-    color: 'black',
+    color: GlobalTheme.black,
     paddingRight: 30,
     marginBottom: 10,
   },
@@ -457,7 +457,7 @@ const pickerSelectStyles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: 'purple',
     borderRadius: 8,
-    color: 'black',
+    color: GlobalTheme.black,
     paddingRight: 30,
     marginBottom: 10,
   },

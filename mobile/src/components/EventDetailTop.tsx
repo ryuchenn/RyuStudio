@@ -6,7 +6,8 @@ import noPicImage from '@/assets/images/NoPic.png';
 import DateHelper from '@/helpers/DateHelper';
 import { EventData } from 'types/EventData';
 import GlobalTheme from '@/styles/Global';
-
+import tagColors from 'constants/TagColors';
+import tagList from 'constants/TagList';
 interface EventDetailTopProps {
   event: EventData;
 }
@@ -64,7 +65,7 @@ const EventDetailTop: React.FC<EventDetailTopProps> = ({ event }) => {
               return (
                 <View style={styles.noticeItem} key={key}>
                   <Icon name={iconName} size={14} color={GlobalTheme.gray2} style={styles.noticeIcon} />
-                  <Text style={styles.noticeText}>{key}</Text>
+                  <Text style={styles.noticeText}>{key.charAt(0).toUpperCase() + key.slice(1).toLowerCase()}</Text>
                 </View>
               );
             }
@@ -74,12 +75,15 @@ const EventDetailTop: React.FC<EventDetailTopProps> = ({ event }) => {
 
       {/* Tags */}
       <View style={styles.row}>
-        {event.tags &&
-          event.tags.map((tag: string, index: number) => (
-            <View style={styles.tag} key={index}>
+        {event.tags.map((tag: string, index: number) => {
+          const tagIndex = tagList.indexOf(tag);
+          const color = tagIndex >= 0 ? tagColors[tagIndex % tagColors.length] : GlobalTheme.background;
+          return (
+            <View key={index} style={[styles.tag, { backgroundColor: color }]}>
               <Text style={styles.tagText}>{tag}</Text>
             </View>
-          ))}
+          );
+        })}
       </View>
       <SectionDivider />
     </View>
@@ -139,7 +143,7 @@ const styles = StyleSheet.create({
   },
   tagText: {
     fontSize: 12,
-    color: GlobalTheme.gray4,
+    color: GlobalTheme.gray3,
   },
 });
 

@@ -21,6 +21,7 @@ import SigninScreen from '@/screens/Account/SigninScreen';
 import SignupScreen from '@/screens/Account/SignupScreen';
 import UserEventScreen from '@/screens/Account/UserEventScreen';
 import UserEventDetailScreen from '@/screens/Account/UserEventDetailScreen';
+import { DefaultHeaderOptions } from '@/styles/Global';
 
 // Different Stack Navigator
 const EventStack = createStackNavigator();
@@ -31,19 +32,22 @@ function EventStackScreen() {
   return (
     <EventStack.Navigator
       screenOptions={{
+        ...DefaultHeaderOptions,
         cardStyle: { backgroundColor: GlobalTheme.background },
       }}
     >
       <EventStack.Screen
         name="Event"
         component={EventScreen}
-        options={{ headerShown: false }}
+        options={{ 
+          headerShown: false,
+        }}
       />
       <EventStack.Screen
         name="EventDetail"
         component={EventDetailScreen}
         options={{
-          headerTitle: '',
+          headerTitle: ''
         }}
       />
       <EventStack.Screen

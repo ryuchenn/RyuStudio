@@ -277,15 +277,15 @@ const SearchAndEventCard: React.FC<SearchAndEventCardProps> = ({ page, apiUrl, n
                     {batchMode ? (
                         <>
                             <TouchableOpacity onPress={() => { setBatchMode(false); setSelectedFavorites([]); }}>
-                                <Icon name="close" size={24} color="#007AFF" />
+                                <Icon name="close" size={24} color={GlobalTheme.primary} />
                             </TouchableOpacity>
                             <TouchableOpacity onPress={handleBatchDelete} style={{ marginLeft: 20 }}>
-                                <Icon name="trash" size={24} color="red" />
+                                <Icon name="trash" size={24} color={GlobalTheme.danger} />
                             </TouchableOpacity>
                         </>
                     ) : (
                         <TouchableOpacity onPress={() => setBatchMode(true)}>
-                            <Icon name="trash" size={24} color="red" style={{ marginRight: 10 }} />
+                            <Icon name="trash" size={24} color={GlobalTheme.danger} style={{ marginRight: 10 }} />
                         </TouchableOpacity>
                     )}
                 </View>

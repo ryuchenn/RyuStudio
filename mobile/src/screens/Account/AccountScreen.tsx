@@ -101,8 +101,8 @@ const AccountScreen: React.FC = ({ navigation }: any) => {
         onPress={handleSignOut}
       >
         <View style={styles.menuLeft}>
-          <Icon name="sign-out" size={20} color="red" style={styles.menuIcon} />
-          <Text style={[styles.menuText, { color: 'red' }]}>Sign Out</Text>
+          <Icon name="sign-out" size={20} color={GlobalTheme.danger} style={styles.menuIcon} />
+          <Text style={[styles.menuText, { color: GlobalTheme.danger }]}>Sign Out</Text>
         </View>
       </TouchableOpacity>
     </ScrollView>

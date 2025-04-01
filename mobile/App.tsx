@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { EventStackScreen, FavoriteStackScreen, AccountStackScreen } from '@/screens/index';
@@ -7,6 +6,7 @@ import { StripeProvider } from '@stripe/stripe-react-native';
 import Env from '@/config/Env';
 import { getTabBarVisibility } from '@/helpers/NavigationHelper';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import GlobalTheme from '@/styles/Global';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import WebHelper from '@/helpers/WebHelper';
@@ -79,7 +79,7 @@ export default function App() {
               tabBarInactiveTintColor: GlobalTheme.gray2,
               tabBarLabel: 'Account',
               tabBarIcon: ({ color }) => (
-                <Icon name="user" size={26} color={color} />
+                <Icon2 name="account" size={26} color={color} />
               ),
             })}
           />
