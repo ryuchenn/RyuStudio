@@ -1,17 +1,21 @@
-import React, { useState, useLayoutEffect, useRef } from 'react';
+import React, { useState, useLayoutEffect, useRef, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ScrollView, Platform, Switch, } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import RNPickerSelect from 'react-native-picker-select';
+import DropDownPicker from 'react-native-dropdown-picker';
 import { RichEditor, RichToolbar } from 'react-native-pell-rich-editor';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon2 from 'react-native-vector-icons/MaterialIcons';
+import Icon3 from 'react-native-vector-icons/Octicons';
+import Icon4 from 'react-native-vector-icons/FontAwesome6';
+import Icon5 from 'react-native-vector-icons/Ionicons';
+import Icon6 from 'react-native-vector-icons/AntDesign';
+import Icon7 from 'react-native-vector-icons/Feather';
 import WebHelper from '@/helpers/WebHelper';
 import Env from '@/config/Env';
 import useAuth from '@/hooks/useAuth';
-import LoadingScreen from '@/screens/System/LoadingScreen';
 import tagList from 'constants/TagList';
 import GlobalTheme from '@/styles/Global';
-// import { SessionDetail } from 'types/SessionDetail';
-
+import SectionDivider from '@/components/SectionDivider';
 interface Session {
   sessionID?: string;
   startDate: Date;
@@ -43,12 +47,12 @@ interface EventEditScreenProps {
 }
 
 const EventEditScreen: React.FC<EventEditScreenProps> = ({ route, navigation }) => {
-  const { user, isLoggedIn, loading } = useAuth();
+  const { user, loading } = useAuth();
 
   // If it didn't have event data -> Add Mode. Otherwise, Edit Mode.
   const editingEvent: EventData | undefined = route.params?.event;
   const isEditing = !!editingEvent;
-
+  
   // Basic Info
   const [name, setName] = useState(editingEvent ? editingEvent.name : '');
   const [locationName, setLocationName] = useState(editingEvent ? editingEvent.location.name : '');
@@ -67,8 +71,6 @@ const EventEditScreen: React.FC<EventEditScreenProps> = ({ route, navigation }) 
     available: '',
     type: 'Normal',
   });
-  const [showStartPicker, setShowStartPicker] = useState(false);
-  const [showEndPicker, setShowEndPicker] = useState(false);
 
   // Notice
   const [notice, setNotice] = useState<Record<string, boolean>>(editingEvent ? editingEvent.notice || {
@@ -91,19 +93,42 @@ const EventEditScreen: React.FC<EventEditScreenProps> = ({ route, navigation }) 
   // Rich Text Editor
   const richText = useRef<RichEditor>(null);
 
+  const [eventID, setEventID] = useState<string | undefined>(editingEvent?.id);
+  
+  // Type(drop down menu)
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(newSession.type || 'Normal');
+  const [items, setItems] = useState([
+    { label: 'Normal', value: 'Normal' },
+    { label: 'Golden', value: 'Golden' },
+  ]);
+
+  useEffect(() => {
+    if (editingEvent) {
+      setEventID(editingEvent.id);
+      setName(editingEvent.name);
+      setLocationName(editingEvent.location.name);
+      setLocationAddress(editingEvent.location.address);
+      setEventDetail(editingEvent.eventDetail);
+      setImagesURL(editingEvent.imagesURL || []);
+      setSessions(editingEvent.session);
+      setNotice(editingEvent.notice || {
+        inPerson: false,
+        indoor: false,
+        outdoor: false,
+        online: false,
+        parking: false,
+      });
+      setSelectedTags(editingEvent.tags || []);
+    }
+  }, [editingEvent]);
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
         <TouchableOpacity
           onPress={() => {
-            if (isEditing) {
-              navigation.navigate('Events', {
-                screen: 'EventDetail',
-                params: { event: route.params?.event },
-              });
-            } else {
-              navigation.goBack();
-            }
+            navigation.goBack();
           }}
           style={{ marginLeft: 10 }}
         >
@@ -118,23 +143,19 @@ const EventEditScreen: React.FC<EventEditScreenProps> = ({ route, navigation }) 
     navigation.setOptions({
       headerRight: () => (
         <TouchableOpacity style={styles.headerButton} onPress={handleSubmit}>
-          <Text style={styles.headerButtonText}>{isEditing ? 'Update' : 'Add'}</Text>
+          <Text style={styles.headerButtonText}>{isEditing ? "Update" : "Add"}</Text>
         </TouchableOpacity>
       ),
     });
   }, [navigation, isEditing, name, locationName, locationAddress, eventDetail, sessions, imagesURL, notice, selectedTags]);
 
-  if (loading) return <LoadingScreen />;
-
   // Date Changer
   const onStartDateChange = (event: any, selectedDate?: Date) => {
-    setShowStartPicker(Platform.OS === 'ios');
     if (selectedDate) {
       setNewSession({ ...newSession, startDate: selectedDate });
     }
   };
   const onEndDateChange = (event: any, selectedDate?: Date) => {
-    setShowEndPicker(Platform.OS === 'ios');
     if (selectedDate) {
       setNewSession({ ...newSession, endDate: selectedDate });
     }
@@ -186,7 +207,7 @@ const EventEditScreen: React.FC<EventEditScreenProps> = ({ route, navigation }) 
     }
   };
 
-  // ADD: add data to backend
+  // ADD or EDIT: add/edit data to backend
   const handleSubmit = async () => {
     // Filter: location, address
     if (!name.trim() || !locationName.trim() || !locationAddress.trim()) {
@@ -201,9 +222,8 @@ const EventEditScreen: React.FC<EventEditScreenProps> = ({ route, navigation }) 
     }
 
     // Combine the data and fields before submitting the data to the backend
-    const payload: EventData = {
+    const basePayload = {
       name,
-      host: user?.uid,
       session: sessions,
       location: {
         name: locationName,
@@ -213,7 +233,12 @@ const EventEditScreen: React.FC<EventEditScreenProps> = ({ route, navigation }) 
       tags: selectedTags,
       eventDetail,
       imagesURL,
+      logUser: user?.uid
     };
+    
+    const payload: EventData = isEditing
+      ? basePayload
+      : { ...basePayload, host: user?.uid }; // Only Insert in Add mode
 
     // Edit -> /events/dataEdit/${editingEvent?.id} || Add -> /events/dataEdit
     try {
@@ -257,13 +282,16 @@ const EventEditScreen: React.FC<EventEditScreenProps> = ({ route, navigation }) 
       Alert.alert('Error', 'Failed to save event. Please try again later.');
     }
   };
-
+  
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.scrollContent}>
 
       {/* Event Name */}
       <View style={styles.formGroup}>
-        <Text style={styles.label}>Event Name</Text>
+        <View style={styles.sectionRow}>
+          <Icon2 name="event" size={22} color={GlobalTheme.gray2} style={styles.sectionIcon} />
+          <Text style={styles.sectionLabel}>Event Name</Text>
+        </View>
         <TextInput
           style={styles.input}
           value={name}
@@ -271,10 +299,14 @@ const EventEditScreen: React.FC<EventEditScreenProps> = ({ route, navigation }) 
           placeholder="Enter event name"
         />
       </View>
+      <SectionDivider/>
 
       {/* Sessions */}
       <View style={styles.formGroup}>
-        <Text style={styles.label}>Sessions</Text>
+        <View style={styles.sectionRow}>
+          <Icon3 name="clock" size={22} color={GlobalTheme.gray2} style={styles.sectionIcon} />
+          <Text style={styles.sectionLabel}>Sessions</Text>
+        </View>
 
         {/* Sessions (Already Existed) */}
         {sessions.map((sess, idx) => (
@@ -292,15 +324,18 @@ const EventEditScreen: React.FC<EventEditScreenProps> = ({ route, navigation }) 
 
         {/* Add Session Form */}
         <View style={styles.newSession}>
+          {/* Start Date & End Date */}
           <Text style={styles.label}>Add New Session</Text>
-          <TouchableOpacity onPress={() => setShowStartPicker(true)}>
-            <Text style={styles.dateText}>Start: {newSession.startDate.toLocaleString()}</Text>
-          </TouchableOpacity>
-          {showStartPicker && (<DateTimePicker value={newSession.startDate} mode="datetime" display="default" onChange={onStartDateChange}/>)}
-          <TouchableOpacity onPress={() => setShowEndPicker(true)}>
-            <Text style={styles.dateText}>End: {newSession.endDate.toLocaleString()}</Text>
-          </TouchableOpacity>
-          {showEndPicker && (<DateTimePicker value={newSession.endDate} mode="datetime" display="default" onChange={onEndDateChange} />)}
+          <View>
+            <Text style={styles.dateText}>Start Date: {newSession.startDate.toLocaleString()}</Text>
+            <DateTimePicker value={newSession.startDate} mode="datetime" display="default" onChange={onStartDateChange}/>
+          </View>
+          <View>
+            <Text style={styles.dateText}>End Date: {newSession.endDate.toLocaleString()}</Text>
+            <DateTimePicker style={styles.datePick} value={newSession.endDate} mode="datetime" display="default" onChange={onEndDateChange} />
+          </View>
+          
+          {/* Price */}
           <TextInput style={styles.input} placeholder="Price" value={newSession.price} onChangeText={(text) => setNewSession({ ...newSession, price: text })} keyboardType="numeric"/>
           
           {/* Remain only shows in edit mode */}
@@ -316,30 +351,42 @@ const EventEditScreen: React.FC<EventEditScreenProps> = ({ route, navigation }) 
 
           <TextInput style={styles.input} placeholder="Available" value={newSession.available}
             onChangeText={(text) => setNewSession({ ...newSession, available: text })} keyboardType="numeric" />
-          <RNPickerSelect
-            onValueChange={(value) => setNewSession({ ...newSession, type: value })}
-            items={[
-              { label: 'Normal', value: 'Normal' },
-              { label: 'Golden', value: 'Golden' },
-            ]}
-            value={newSession.type} useNativeAndroidPickerStyle={false} style={pickerSelectStyles} placeholder={{}}
+          <DropDownPicker
+            open={open}
+            value={value}
+            items={items}
+            setOpen={setOpen}
+            setValue={(val) => {
+              setValue(val);
+              setNewSession({ ...newSession, type: value });
+            }}
+            setItems={setItems}
+            placeholder="Select session type"
+            zIndex={1000}
+            listMode="SCROLLVIEW"
+            style={{ marginBottom: open ? 100 : 20 }}
           />
           <TouchableOpacity style={styles.addSessionButton} onPress={addSession}>
             <Text style={styles.addSessionButtonText}>Add Session</Text>
           </TouchableOpacity>
         </View>
       </View>
+      <SectionDivider/>
 
       {/* Location */}
       <View style={styles.formGroup}>
-        <Text style={styles.label}>Location Name</Text>
+        <View style={styles.sectionRow}>
+          <Icon4 name="location-dot" size={22} color={GlobalTheme.gray2} style={styles.sectionIcon} />
+          <Text style={styles.sectionLabel}>Location</Text>
+        </View>
+        <Text style={styles.label}>Name</Text>
         <TextInput
           style={styles.input}
           value={locationName}
           onChangeText={setLocationName}
           placeholder="Enter location name"
         />
-        <Text style={styles.label}>Location Address</Text>
+        <Text style={styles.label}>Address</Text>
         <TextInput
           style={styles.input}
           value={locationAddress}
@@ -347,13 +394,17 @@ const EventEditScreen: React.FC<EventEditScreenProps> = ({ route, navigation }) 
           placeholder="Enter location address"
         />
       </View>
+      <SectionDivider/>
 
       {/* Notice */}
       <View style={styles.formGroup}>
-        <Text style={styles.label}>Notice Options</Text>
+        <View style={styles.sectionRow}>
+          <Icon5 name="information-circle" size={22} color={GlobalTheme.gray2} style={styles.sectionIcon} />
+          <Text style={styles.sectionLabel}>Info</Text>
+        </View>
         {['inPerson', 'indoor', 'outdoor', 'online', 'parking'].map(key => (
           <View key={key} style={styles.noticeRow}>
-            <Text style={styles.noticeLabel}>{key}</Text>
+            <Text style={styles.noticeLabel}>{key.charAt(0).toUpperCase() + key.slice(1).toLowerCase()}</Text>
             <Switch
               value={notice[key]}
               onValueChange={() => toggleNotice(key)}
@@ -362,10 +413,14 @@ const EventEditScreen: React.FC<EventEditScreenProps> = ({ route, navigation }) 
           </View>
         ))}
       </View>
+      <SectionDivider/>
 
       {/* Tags */}
       <View style={styles.formGroup}>
-        <Text style={styles.label}>Tags</Text>
+        <View style={styles.sectionRow}>
+          <Icon6 name="tags" size={22} color={GlobalTheme.gray2} style={styles.sectionIcon} />
+          <Text style={styles.sectionLabel}>Tags</Text>
+        </View>
         <View style={styles.tagsContainer}>
           {tagList.map(tag => {
             const selected = selectedTags.includes(tag);
@@ -381,10 +436,14 @@ const EventEditScreen: React.FC<EventEditScreenProps> = ({ route, navigation }) 
           })}
         </View>
       </View>
+      <SectionDivider/>
 
       {/* Images URL */}
       <View style={styles.formGroup}>
-        <Text style={styles.label}>Images URL</Text>
+        <View style={styles.sectionRow}>
+          <Icon6 name="earth" size={22} color={GlobalTheme.gray2} style={styles.sectionIcon} />
+          <Text style={styles.sectionLabel}>Images URL</Text>
+        </View>
         <View style={styles.imageInputRow}>
           <TextInput
             style={[styles.input, { flex: 1 }]}
@@ -409,10 +468,14 @@ const EventEditScreen: React.FC<EventEditScreenProps> = ({ route, navigation }) 
           </View>
         ))}
       </View>
+      <SectionDivider/>
 
       {/* Event Detail（Rich Text Editor） */}
       <View style={styles.formGroup}>
-        <Text style={styles.label}>Event Detail</Text>
+        <View style={styles.sectionRow}>
+          <Icon7 name="clipboard" size={22} color={GlobalTheme.gray2} style={styles.sectionIcon} />
+          <Text style={styles.sectionLabel}>Event Detail</Text>
+        </View>
         <RichEditor
           ref={richText}
           initialContentHTML={eventDetail}
@@ -473,11 +536,15 @@ const styles = StyleSheet.create({
   },
   formGroup: {
     margin: 10,
+    marginTop: 25,
   },
   label: {
-    fontSize: 16,
+    fontSize: 18,
     marginBottom: 4,
     fontWeight: 'bold',
+  },
+  datePick: {
+    marginBottom: 10,
   },
   input: {
     borderWidth: 1,
@@ -515,8 +582,9 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalTheme.lightGray,
   },
   dateText: {
-    fontSize: 14,
-    color: GlobalTheme.primary,
+    fontSize: 17,
+    color: GlobalTheme.gray2,
+    marginTop: 10,
     marginBottom: 10,
   },
   addSessionButton: {
@@ -541,6 +609,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     borderRadius: 25,
     marginLeft: 10,
+    marginBottom: 10,
   },
   addImageButtonText: {
     color: GlobalTheme.white,
@@ -607,6 +676,20 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: GlobalTheme.gray4,
     marginBottom: 4,
+  },
+  sectionRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 6,
+  },
+  sectionIcon: {
+    marginRight: 6,
+    marginBottom: 5,
+  },
+  sectionLabel: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 5,
   },
 });
 

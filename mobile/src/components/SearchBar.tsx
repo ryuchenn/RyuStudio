@@ -135,7 +135,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 
         {/* Filter button at search bar */}
         <TouchableOpacity onPress={toggleFilter}>
-          <Icon2 name="filter" size={20} style={styles.iconRight} />
+          <Icon2 name="options" size={20} style={styles.iconRight} />
         </TouchableOpacity>
       </View>
       

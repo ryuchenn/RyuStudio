@@ -147,6 +147,16 @@ const EventDetailScreen: React.FC<EventDetailProps> = ({ route, navigation }) =>
   // Header icon setting
   useLayoutEffect(() => {
     navigation.setOptions({
+      headerLeft: () => (
+        <TouchableOpacity
+          onPress={() => {
+              navigation.goBack();
+          }}
+          style={{ marginLeft: 10 }}
+        >
+          <Icon name="chevron-left" size={20} color={GlobalTheme.primary} />
+        </TouchableOpacity>
+      ),
       headerRight: () => (
         <View style={{ flexDirection: 'row', marginRight: 10 }}>
 

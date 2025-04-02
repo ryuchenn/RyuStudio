@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView, FlatList, StyleSheet, View, TouchableOpacity, Alert } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import SearchBar from './SearchBar';
 import EventCard from './EventCard';
 import AppHelper from '@/helpers/WebHelper';
@@ -261,6 +262,12 @@ const SearchAndEventCard: React.FC<SearchAndEventCardProps> = ({ page, apiUrl, n
         }
         return null;
     };
+
+    useFocusEffect(
+        React.useCallback(() => {
+          fetchEvents(query); // Refresh the page when user click Event, UserEvent, Favorite
+        }, [query])
+    );
 
     useEffect(() => {
         fetchEvents(query);

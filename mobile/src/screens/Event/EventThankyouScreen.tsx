@@ -5,30 +5,31 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 const EventThankyouScreen: React.FC = ({ navigation, route }: any) => {
   const { orderID } = route.params;
+
   return (
-    
     <View style={styles.container}>
       <Icon name="check-circle" size={150} color={GlobalTheme.green} />
       <Text style={styles.title}>Thank You!</Text>
       <Text>Your registration has been completed.</Text>
       <TouchableOpacity 
         style={styles.eventButton} 
-        onPress={() => navigation.reset({
-          index: 0,
-          routes: [
-            {
-              name: 'Accounts',
-              state: {
-                routes: [
-                  {
-                    name: 'UserEventDetail',
-                    params: { orderID: orderID },
-                  },
-                ],
+        onPress={() => 
+          navigation.reset({
+            index: 0,
+            routes: [
+              {
+                name: 'Accounts',
+                state: {
+                  routes: [
+                    {
+                      name: 'UserEventDetail',
+                      params: { orderID: orderID },
+                    },
+                  ],
+                },
               },
-            },
-          ],
-        })
+            ],
+          })
       }
       >
         <Text style={styles.eventButtonText}>Your Event</Text>

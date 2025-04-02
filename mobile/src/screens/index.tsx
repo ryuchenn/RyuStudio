@@ -74,6 +74,7 @@ function FavoriteStackScreen() {
   return (
     <FavoriteStack.Navigator
       screenOptions={{
+        ...DefaultHeaderOptions,
         cardStyle: { backgroundColor: GlobalTheme.background },
       }}
     >
@@ -90,6 +91,7 @@ function AccountStackScreen() {
   return (
     <AccountStack.Navigator
       screenOptions={{
+        ...DefaultHeaderOptions,
         cardStyle: { backgroundColor: GlobalTheme.background },
       }}
     >
@@ -132,7 +134,7 @@ function AccountStackScreen() {
       <AccountStack.Screen
         name="UserEventDetail"
         component={UserEventDetailScreen}
-        options={{ headerTitle: '' }}
+        options={{ headerTitle: 'Your Event' }}
       />
       <AccountStack.Screen
         name="EventEdit"

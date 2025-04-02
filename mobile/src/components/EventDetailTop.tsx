@@ -127,11 +127,14 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   noticeIcon: {
-    marginRight: 10,
+    width: 16,
+    textAlign: 'center',
+    marginRight: 8,
   },
   noticeText: {
     fontSize: 12,
     color: GlobalTheme.gray2,
+    lineHeight: 16,
   },
   tag: {
     backgroundColor: GlobalTheme.gray0,
