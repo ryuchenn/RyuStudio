@@ -161,7 +161,7 @@ router.get('/hostProfile/:accountID', async (req: Request, res: Response): Promi
       return;
     }
     const accountData = accountDoc.data();
-    console.log(accountData)
+    
     res.status(200).json({
       displayName: accountData?.displayName,
       phoneNumber: accountData?.phoneNumber,

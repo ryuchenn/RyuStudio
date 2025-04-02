@@ -132,7 +132,7 @@ router.delete(
 
 /**
  * POST /eventOrder
- * Add the data to eventOrder collection.
+ * Add the data to eventOrder collection. Also, update session.remain and update ticket.quantity
  */
 router.post(
   "/eventOrder",
@@ -140,28 +140,24 @@ router.post(
     try {
       // The data from EventCheckout
       const {
-        event, // event.id
-        tickets, // array of { sessionID: string, quantity: number }, quantity=the amount of tikcet in collection
-        accountID, // account id
-        couponCode, // (optional)
-        paymentMethod, // 'Stripe' | 'Paypal' | 'ETransfer'
-        paymentFields, // CardName, country, postal code...
-        subtotal, // subtotal
-        GST, // GST
-        total, // Total
+        event,          // event.id
+        tickets,        // array of { sessionID: string, quantity: number }, quantity=the amount of tikcet in collection
+        accountID,      // account id
+        couponCode,     // (optional)
+        paymentMethod,  // 'Stripe' | 'Paypal' | 'ETransfer'
+        paymentFields,  // CardName, country, postal code...
+        subtotal,       // subtotal
+        GST,            // GST
+        total,          // Total (Not decrease amount yet)
       } = req.body;
 
       // 1. Filter： at least one ticket should be choosen.
       const totalTickets = tickets.reduce(
-        (sum: number, ticket: { quantity: number }) => {
-          return sum + (ticket.quantity || 0);
-        },
+        (sum: number, ticket: { quantity: number }) => sum + (ticket.quantity || 0),
         0
       );
       if (totalTickets < 1) {
-        return res
-          .status(400)
-          .json({ message: "At least one ticket must be purchased." });
+        return res.status(400).json({ message: "At least one ticket must be purchased." });
       }
 
       // 2. Filter： Validating columns by different payment method.
@@ -171,15 +167,11 @@ router.post(
           !paymentFields?.country ||
           !paymentFields?.postalCode
         ) {
-          return res
-            .status(400)
-            .json({ message: "Incomplete Stripe payment fields." });
+          return res.status(400).json({ message: "Incomplete Stripe payment fields." });
         }
       } else if (paymentMethod === "Paypal") {
         if (!paymentFields?.paypalEmail) {
-          return res
-            .status(400)
-            .json({ message: "Incomplete Paypal payment fields." });
+          return res.status(400).json({ message: "Incomplete Paypal payment fields." });
         }
       } else if (paymentMethod === "ETransfer") {
       } else {
@@ -188,56 +180,112 @@ router.post(
 
       // 3. Filter: coupon code
       let couponID: string | null = null;
+      let discountAmount = 0;
       if (couponCode) {
         const couponSnapshot = await authDb
           .collection("coupon")
           .where("code", "==", couponCode)
           .get();
+
         if (couponSnapshot.empty) {
           return res.status(400).json({ message: "Invalid promo code." });
         } else {
-          couponID = couponSnapshot.docs[0].id;
+          const couponDoc = couponSnapshot.docs[0];
+          const couponData = couponDoc.data();
+
+          // Check the remaining quantity
+          if (couponData.quantity <= 0) {
+            return res.status(400).json({ message: "This promo code has been used." });
+          }
+          
+          // ***** Notice *****
+          // It will generate an error when Filter 4 get error after the coupon collection data upated in the step will not recover.
+          // I try to use rollback(runTransaction) in here, but it don't know how to combine euthDb and authDb in one instance(firestore()).
+          await couponDoc.ref.update({ // Decrease the amount of quantity
+            quantity: couponData.quantity - 1,
+          });
+
+          couponID = couponDoc.id;
+          if (couponData.type === "value") {
+            discountAmount = couponData.amount;  // FinalTotal = total - discountAmount
+          } else if (couponData.type === "percentage") {
+            discountAmount = total * (couponData.amount / 100); // (X% off)
+          }
         }
       }
 
-      // 4. Add the data to eventOrder collection
+      // 4. Filter & Update: filter data and collection is exist. 
+      // Also, update session.remain by event.id and ticket.sessionID
+      const eventDocRef = await eventDb.collection("event").doc(event.id);
+      const eventDoc = await eventDocRef.get();
+      if (!eventDoc.exists) {
+        return res.status(404).json({ message: "Event not found." });
+      }
+      const eventDataFromDB = eventDoc.data();
+      if (!eventDataFromDB) {
+        return res.status(500).json({ message: "Event data is undefined." });
+      }
+      const sessionsArray = eventDataFromDB.session;
+      if (!Array.isArray(sessionsArray)) {
+        return res.status(500).json({ message: "Event sessions data is invalid." });
+      }
+
+      for (const ticket of tickets) {
+        const sessionIndex = sessionsArray.findIndex((sess: any) => sess.sessionID === ticket.sessionID);
+        if (sessionIndex === -1) {
+          return res.status(400).json({ message: `Session ${ticket.sessionID} not found in event.` });
+        }
+        const sessionItem = sessionsArray[sessionIndex];
+
+        // Check remain quantity
+        if (Number(sessionItem.remain) < ticket.quantity) {
+          return res.status(400).json({ message: `Insufficient remaining tickets for session ${ticket.sessionID}.` });
+        }
+        // Decrease the amount of remain
+        sessionsArray[sessionIndex].remain = Number(sessionItem.remain) - ticket.quantity;
+      }
+      // Update event collection session data
+      await eventDocRef.update({ session: sessionsArray });
+
+      // ===== 4. Filter&Update End =====
+
+      // 5. Add the data to eventOrder collection
+      let finalTotal = total - discountAmount;
+      if (finalTotal < 0) finalTotal = 0;
       const eventOrderRef = await authDb.collection("eventOrder").add({
         eventID: event.id,
         accountID,
         couponID,
         subtotal,
         GST,
-        total,
+        discountAmount,
+        total: finalTotal,
         updateAt: new Date().toISOString(),
       });
 
-      // 5. Create the subcollection "ticket" into eventOrder collection if the quantity>0
-      // If the user buy the same and multiple tikcets in one order, it will generate multiple files to ticket subcollection.
-      const ticketPromises = tickets.map(
-        async (ticket: { sessionID: string; quantity: number }) => {
-          if (ticket.quantity > 0) {
-            const ticketCollection = eventOrderRef.collection("ticket");
-            const promises = [];
-            for (let i = 0; i < ticket.quantity; i++) {
-              promises.push(
-                ticketCollection.add({
-                  sessionID: ticket.sessionID,
-                  status: "NotUsed",
-                  accountID,
-                  createdAt: new Date().toISOString(),
-                })
-              );
-            }
-            return Promise.all(promises);
+      // 6. Create the subcollection "ticket" into eventOrder collection if the quantity>0
+      // If the user buys the same and multiple tickets in one order, it will generate multiple files in the ticket subcollection.
+      const ticketPromises = tickets.map(async (ticket: { sessionID: string; quantity: number }) => {
+        if (ticket.quantity > 0) {
+          const ticketCollection = eventOrderRef.collection("ticket");
+          const promises = [];
+          for (let i = 0; i < ticket.quantity; i++) {
+            promises.push(
+              ticketCollection.add({
+                sessionID: ticket.sessionID,
+                status: "NotUsed",
+                accountID,
+                createdAt: new Date().toISOString(),
+              })
+            );
           }
-          return null;
+          return Promise.all(promises);
         }
-      );
+        return null;
+      });
       await Promise.all(ticketPromises);
 
-      return res
-        .status(201)
-        .json({ message: "Checkout successful", orderID: eventOrderRef.id });
+      return res.status(201).json({ message: "Checkout successful", orderID: eventOrderRef.id });
     } catch (error) {
       console.error("Checkout error:", error);
       return res.status(500).json({ message: "Checkout failed", error });
@@ -346,11 +394,21 @@ router.get(
         orderData.event = { id: eventDoc.id, ...eventDoc.data() };
       }
 
+      // Get the joined session data from event parent collection. Every event collection should have at least one session.
+      const eventSessions: any[] = orderData.event?.session || [];
+
       // Get ticket subcollection fields
       const ticketsSnapshot = await orderDoc.ref.collection("ticket").get();
       const tickets = ticketsSnapshot.docs.map((doc) => {
         const ticket = doc.data();
         ticket.id = doc.id;
+
+        // Find event's session fields information by ticket.sessionID
+        const matchingSession = eventSessions.find(
+          (sess) => sess.sessionID === ticket.sessionID
+        );
+        ticket.sessionDetail = matchingSession || null;
+
         ticket.QRCode = `${doc.id}+++${ticket.sessionID}`;
         return ticket;
       });
