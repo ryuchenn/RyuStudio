@@ -16,6 +16,6 @@ const Env = {
     FIREBASE_AUTH_APPID: FIREBASE_AUTH_APPID,
     FIREBASE_AUTH_MEASUREMENTID: FIREBASE_AUTH_MEASUREMENTID,
 }
-// console.log(Env) // Refresh
+console.log(Env) // Refresh
 
 export default Env;
