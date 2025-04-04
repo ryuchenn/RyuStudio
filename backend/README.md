@@ -6,6 +6,7 @@
 </div>
 
 This repository contains the `Node.js` back‑end API for the project. <br>
+This [API data](https://studio-server-henna.vercel.app/api/events/) is provided by the backend system deployed on `Vercel` via a `RESTful` API. If the website is dead, the firebase might be expired. You could just check the backend [home page](https://studio-server-henna.vercel.app/) <br>
 It is built with `Express` and integrates with `Firebase` Admin SDK to interact with multiple Firestore databases. The `API` provides endpoints for user authentication, event management, favorites, order processing, coupon handling, and more.
 
 ## Features
