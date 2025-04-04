@@ -1,6 +1,5 @@
 declare module '@env' {
   export const API_BASE_URL: string;
-  export const API_EVENT_ALL_URL: string;
   export const FIREBASE_KEY: string;
   export const FIREBASE_AUTH_KEY: string;
   export const FIREBASE_EVENT_KEY: string;

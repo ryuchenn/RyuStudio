@@ -31,6 +31,7 @@ const AccountStack = createStackNavigator();
 function EventStackScreen() {
   return (
     <EventStack.Navigator
+      initialRouteName="Event"
       screenOptions={{
         ...DefaultHeaderOptions,
         cardStyle: { backgroundColor: GlobalTheme.background },
@@ -73,6 +74,7 @@ function EventStackScreen() {
 function FavoriteStackScreen() {
   return (
     <FavoriteStack.Navigator
+      initialRouteName="Favorite"
       screenOptions={{
         ...DefaultHeaderOptions,
         cardStyle: { backgroundColor: GlobalTheme.background },
@@ -90,6 +92,7 @@ function FavoriteStackScreen() {
 function AccountStackScreen() {
   return (
     <AccountStack.Navigator
+      initialRouteName="Account"
       screenOptions={{
         ...DefaultHeaderOptions,
         cardStyle: { backgroundColor: GlobalTheme.background },

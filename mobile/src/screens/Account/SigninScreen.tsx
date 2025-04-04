@@ -175,8 +175,23 @@ const SigninScreen: React.FC = ({ navigation }: any) => {
           {/* Back to Event Button */}
           <View style={styles.backToRow}>
             <Text style={styles.backToText}>Back to</Text>
-            <TouchableOpacity onPress={() => navigation.navigate('Events')}>
-              <Text style={styles.backToButtonText}> Event</Text>
+            <TouchableOpacity onPress={() => 
+              navigation.reset({
+                index: 0,
+                routes: [
+                  {
+                    name: 'Accounts',
+                    state: {
+                      routes: [
+                        {
+                          name: 'Account',
+                        },
+                      ],
+                    },
+                  },
+                ],
+              })}>
+              <Text style={styles.backToButtonText}> Account</Text>
             </TouchableOpacity>
           </View>
         </View>

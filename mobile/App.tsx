@@ -11,9 +11,13 @@ import GlobalTheme from '@/styles/Global';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import WebHelper from '@/helpers/WebHelper';
 import AuthStorage from '@/helpers/AuthStorage';
+import { navigationRef, resetStackToTop } from '@/helpers/NavigationHelper';
+
 const Tab = createBottomTabNavigator();
 
+
 export default function App() {
+  
   useEffect(() => {
     const checkToken = async () => {
       const token = await AsyncStorage.getItem('token');
@@ -40,11 +44,17 @@ export default function App() {
 
   return (
     <StripeProvider publishableKey={Env.STRIPE_PK_KEY}>
-      <NavigationContainer>
+      <NavigationContainer ref={navigationRef}>
         <Tab.Navigator>
           <Tab.Screen
             name="Events"
             component={EventStackScreen}
+            listeners={{
+              tabPress: (e) => {
+                e.preventDefault(); 
+                resetStackToTop('Events', 'Event'); // The First Screen
+              },
+            }}
             options={({ route }) => ({
               headerShown: false,
               tabBarStyle: getTabBarVisibility(route),
@@ -58,6 +68,12 @@ export default function App() {
           <Tab.Screen
             name="Favorites"
             component={FavoriteStackScreen}
+            listeners={{
+              tabPress: (e) => {
+                e.preventDefault(); 
+                resetStackToTop('Favorites', 'Favorites'); // The First Screen
+              },
+            }}
             options={({ route }) => ({
               headerShown: false,
               tabBarStyle: getTabBarVisibility(route),
@@ -72,6 +88,12 @@ export default function App() {
           <Tab.Screen
             name="Accounts" // Navigate route use this. NOT tabBarLabel.
             component={AccountStackScreen}
+            listeners={{
+              tabPress: (e) => {
+                e.preventDefault(); 
+                resetStackToTop('Accounts', 'Account'); // The First Screen
+              },
+            }}
             options={({ route }) => ({
               headerShown: false,
               tabBarStyle: getTabBarVisibility(route),

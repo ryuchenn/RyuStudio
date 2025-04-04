@@ -1,4 +1,5 @@
 import { getFocusedRouteNameFromRoute, Route } from '@react-navigation/native';
+import { createNavigationContainerRef } from '@react-navigation/native';
 
 const hiddenTabScreens = ['Signin', 'Signup', 'EventDetail', 'EventCheckout', 'EventThankyou'];
 
@@ -12,3 +13,15 @@ export function getTabBarVisibility(route: Route<string>): { display: 'none' } |
   return { height: 83 };
 }
 
+// For reset bottom tab
+export const navigationRef = createNavigationContainerRef();
+
+// For reset bottom tab
+export function resetStackToTop(tabName: string, stackInitialRoute: string) {
+  if (navigationRef.isReady()) {
+    (navigationRef as any).navigate(tabName, {
+      screen: stackInitialRoute,
+      params: undefined,
+    });
+  }
+}
